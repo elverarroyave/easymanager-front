@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1976d2;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Easy Manager</a>
+    <a class="navbar-brand">Easy Manager</a>
     <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,21 +10,21 @@
           <a class="nav-link active" aria-current="page" routerLink="/" (click)="isCollapsed = !isCollapsed">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" (click)="isCollapsed = !isCollapsed">Venta</a>
+          <a class="nav-link" style="cursor: pointer;" (click)="isCollapsed = false">Venta</a>
         </li>
         <li class="nav-item dropdown" dropdown>
-          <a class="nav-link dropdown-toggle" dropdownToggle href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" dropdownToggle id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Productos
           </a>
           <ul class="dropdown-menu" *dropdownMenu aria-labelledby="navbarScrollingDropdown">
-            <li><a class="dropdown-item" href="#" (click)="isCollapsed = !isCollapsed" routerLink="/products/add-product">Añadir nuevo</a></li>
-            <li><a class="dropdown-item" href="#" (click)="isCollapsed = !isCollapsed">Editar</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="isCollapsed = false" routerLink="/products/add-product">Añadir nuevo</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="isCollapsed = false">Editar</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#" (click)="isCollapsed = !isCollapsed" routerLink="/products/list-products">Ver todos</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="isCollapsed = false" routerLink="/products/list-products">Ver todos</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Link</a>
+          <a class="nav-link disabled" tabindex="-1" aria-disabled="true">Link</a>
         </li>
       </ul>
     </div>

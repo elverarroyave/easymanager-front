@@ -12,6 +12,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { ListProductComponent } from './products/list-product/list-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,8 +30,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
-
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

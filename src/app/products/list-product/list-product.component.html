@@ -1,3 +1,35 @@
-<div class="container">
-  <h1 class="tetxt">Añadir nuevo producto</h1>
+<div class="container" style="margin-top: 40px;">
+  <h1 class="text">Lista de todos los productos</h1>
+  <div class="row mt-3" style="display: flex; justify-content: center;">
+
+    <div class="col-sm-auto mt-2 mb-4" *ngFor='let product of products'>
+      <div class="card" style="width: 18rem;">
+        <img src="../../../assets/product-icon.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title text">{{product.name}}</h5>
+          <h6 class="subtitle">Código: {{product.code}}</h6>
+          <p class="card-text">Descripción: {{product.description}}</p>
+          <h6 class="card-text">Marca: {{product.brand}}</h6>
+          <h6>Cantidad disponible: {{product.stock}} und.</h6>
+          <br>
+          <h5 class="text">Precio: {{product.publicPrice | currency: '$'}}</h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-pagination text-center" style="background-color: azure;" >
+      <div>
+        <i style="cursor: pointer; margin-right: 10px;" (click)="rewind()" *ngIf="!isFirst" class='bx bxs-chevrons-left'></i>
+      </div>
+      <span class="text">Página: </span>
+      <span class="text" *ngFor="let p of totalPages; let i=index">
+        <i style="cursor: pointer; margin-right: 5px;" [ngClass]="{'text-primary': i===page}" (click)="setNumberPage(i)">{{i+1}}</i>
+      </span>
+      <span class="text"> ... de: {{totalPages.length}}</span>
+      <div>
+        <i style="cursor: pointer; margin-left: 10px;" (click)="forward()" *ngIf="!isLast" class='bx bxs-chevrons-right'></i>
+      </div>
+    </div>
+
+  </div>
 </div>
