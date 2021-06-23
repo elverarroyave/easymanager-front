@@ -1,17 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Product } from '../model/Product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-  private productsURL: string = 'http://localhost:8080/api/v1/products/productsByPages?'
+  private productsURL: string = 'http://localhost:8080/api/v1/products/'
   constructor(private httpClient: HttpClient) { }
 
   public productsByPages(page: number, order:string, size:number, asc: boolean){
-    console.log(this.productsURL + `page=${page}&size=${size}&order=${order}&asc=${asc}`)
-    return this.httpClient.get<any>(this.productsURL + `page=${page}&size=${size}&order=${order}&asc=${asc}`);
+    return this.httpClient.get<any>(this.productsURL + 'productsByPages?' + `page=${page}&size=${size}&order=${order}&asc=${asc}`);
+  }
+
+  public saveProduct(product: Product): Observable<any>{
+    return this.httpClient.post<any>(this.productsURL, product);
+  }
+
+  public findById(id: number): Observable<any>{
+    return this.httpClient.get<any>(this.productsURL + id);
+  }
+
+  public updateProduct(id:number, product: Product){
+    return this.httpClient.put(this.productsURL + id, product);
+  }
+
+  public deleteProdcut(id:number){
+    return this.httpClient.delete(this.productsURL + id);
   }
 
 }

@@ -3,8 +3,11 @@
   <div class="row mt-3" style="display: flex; justify-content: center;">
 
     <div class="col-sm-auto mt-2 mb-4" *ngFor='let product of products'>
-      <div class="card" style="width: 18rem;">
-        <img src="../../../assets/product-icon.jpg" class="card-img-top" alt="...">
+      <div class="card" style="width: 18rem; cursor: pointer;" routerLink="/products/product-detail/{{product.id}}">
+        <img 
+        src="../../../assets/product-icon.jpg"  
+        class="card-img-top" 
+        alt="..." >
         <div class="card-body">
           <h5 class="card-title text">{{product.name}}</h5>
           <h6 class="subtitle">Código: {{product.code}}</h6>
@@ -12,12 +15,12 @@
           <h6 class="card-text">Marca: {{product.brand}}</h6>
           <h6>Cantidad disponible: {{product.stock}} und.</h6>
           <br>
-          <h5 class="text">Precio: {{product.publicPrice | currency: '$'}}</h5>
+          <h5 class="text">Precio: {{product.publicPrice | currency: '$'}}</h5>          
         </div>
       </div>
     </div>
 
-    <div class="text-pagination text-center" style="background-color: azure;" >
+    <div class="text-pagination text-center">
       <div>
         <i style="cursor: pointer; margin-right: 10px;" (click)="rewind()" *ngIf="!isFirst" class='bx bxs-chevrons-left'></i>
       </div>

@@ -1,1 +1,79 @@
-<p>add-product works!</p>
+<div class="container mt-5">
+  <h1 class="text text-center mb-4">Agregar un nuevo producto</h1>
+
+  <form [formGroup]="formProduct" action="">
+
+    <div class="row mb-4">
+      <div class="col-sm-6">
+        <label for="" class="text mb-1">Nombre:</label>
+        <input type="text" formControlName="name" class="form-control" placeholder="Ej: Marcador">
+      </div>
+  
+      <div class="col-sm-3">
+        <label for="" class="text mb-1">Codigo:</label>
+        <input type="text" formControlName="code" class="form-control" placeholder="AC6512656">
+      </div>
+  
+      <div class="col-sm-3">
+        <label for="" class="text mb-1">Marca:</label>
+        <input type="text" formControlName="brand" class="form-control" placeholder="Ej: Eternar">
+      </div>
+    </div>
+
+    <div class="row mb-4">
+   
+      <div class="col-sm-3">
+        <label for="" class="text mb-1">Categoria:</label>
+        <select class="form-select" formControlName="category" aria-label="Default select example">
+          <option selected>Seleccione uno...</option>
+          <option value="Papelería">Papeleria</option>
+          <option disabled value="Cosmeticos">Cosmeticos</option>
+          <option disabled value="Farmacos">Farmacos</option>
+        </select>
+      </div>
+
+      <div class="col-sm-9">
+        <label for="" class="text mb-1">Descripción:</label>
+        <textarea class="form-control" formControlName="description" placeholder="Ej: Marcador Permanente Eterna, color negro" id="floatingTextarea" style="height: 30px;"></textarea>
+      </div>
+
+  </div>
+
+
+    <div class="row mb-4">
+      <div class="col-sm-3">
+        <label for="" class="text mb-1">Precio al costo:</label>
+        <input type="number" formControlName="privatePrice" class="form-control" placeholder="Ej: 900">
+      </div>
+  
+      <div class="col-sm-3">
+        <label for="" class="text mb-1">Precio al publico</label>
+        <input type="number" formControlName="publicPrice" class="form-control" placeholder="Ej: 1500">
+      </div>
+
+      <div class="col-sm-3">
+        <label for="" class="text mb-1">Cantidad base</label>
+        <input type="number" formControlName="baseQuantity" class="form-control" placeholder="Ej: 24">
+      </div>
+
+      <div class="col-sm-3">
+        <label for="" class="text mb-1">Cantidad adquirdia</label>
+        <input type="number" formControlName="stock" class="form-control" placeholder="Ej: 24">
+      </div>
+    </div> 
+
+    <div class="row mb-4">
+      <div class="col-sm-12">
+        <label class="text mb-1" for="">Sube una foto:</label>
+        <input type="file" class="form-control" placeholder="Agrega tu foto. .jpg .png .svg">
+      </div>
+      <!-- <div class="col-sm-12 mt-2">
+        <progressbar value="" type="warning">%</progressbar>
+      </div> -->
+    </div>
+  </form>
+
+  <div class="mt-4" style="display: flex; justify-content: center;">
+    <button class="btn btn-primary" [disabled]="formProduct.invalid" (click)="addProduct()">Agregar nuevo producto</button>
+  </div>
+</div> 

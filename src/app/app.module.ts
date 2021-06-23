@@ -13,6 +13,8 @@ import { AddProductComponent } from './products/add-product/add-product.componen
 import { ListProductComponent } from './products/list-product/list-product.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AlertService } from './services/alert.service';
+import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     HeadComponent,
     HomeComponent,
     AddProductComponent,
-    ListProductComponent
+    ListProductComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,9 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AlertService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

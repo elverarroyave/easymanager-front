@@ -32,7 +32,7 @@ export class ListProductComponent implements OnInit {
       this.products = data.content;
       this.isFirst = data.first;
       this.isLast = data.last;
-      this.totalPages = new Array(data.totalPages)
+      this.totalPages = new Array(data.totalPages);
       console.log(data);
     },
     err=>{
@@ -59,6 +59,13 @@ export class ListProductComponent implements OnInit {
     this.loadProducts();
   }
 
+  accion(event){
+    if(event == 'eliminar'){
+      console.log('Click en Eliminar')
+    }else{
+      console.log('Click en body')
+    }
+  }
 
 
 }
