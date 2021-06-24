@@ -34,12 +34,11 @@ export class ProductDetailComponent implements OnInit {
       this.uploadDates();
     }, err =>{
       console.log(err)
-    })
+    })  
 
 
     //Crear Formulario
     this.formProductDetail = this.fb.group({
-
       name:['', Validators.required],
       code:['', Validators.required],
       brand:[''],

@@ -1,0 +1,111 @@
+<div class="container mt-4 mb-4">
+  <div class="mb-4">
+    <div class="container user-icon">
+      <img
+        src="../../../assets/user-circle-regular-120.png"
+        style="width: auto; height: 100%"
+      />
+    </div>
+    <h1 class="text text-center mt-4">
+      {{ clientRquest.name }} {{ clientRquest.lastName }}
+    </h1>
+  </div>
+
+  <div class="container row">
+    <div class="col-md-6">
+      <form action="" [formGroup]="formClientDetail">
+        <div class="row mt-4">
+          <div class="col-md-12">
+            <label class="text" for="">Nombres:</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              placeholder="Ingrese sus nombres..."
+            />
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-md-12">
+            <label class="text" for="">Apellidos:</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="lastName"
+              placeholder="Ingrese sus apellidos..."
+            />
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-md-8">
+            <label class="text" for="">Email:</label>
+            <input
+              type="emial"
+              class="form-control"
+              formControlName="email"
+              placeholder="Ingrese su email..."
+            />
+          </div>
+          <div class="col-md-4">
+            <label class="text" for="">Documento:</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="document"
+              placeholder="Ingrese su email..."
+            />
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-md-8">
+            <label class="text" for="">Dirrección:</label>
+            <input
+              type="address"
+              class="form-control"
+              formControlName="address"
+              placeholder="Ingrese su direccion..."
+            />
+          </div>
+          <div class="col-md-4">
+            <label class="text" for="">Teléfono:</label>
+            <input
+              type="phone"
+              class="form-control"
+              formControlName="phone"
+              placeholder="Ingrese su número de teléfono..."
+            />
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-md-6">
+            <label class="text"for="">Fecha de creacción</label>
+            <input type="text" class="form-control" disabled=true  value="{{clientRquest.createDate | date:'medium'}}">
+          </div>
+          <div class="col-md-6">
+            <label class="text"for="">Fecha de ultima modificación</label>
+            <input type="text" class="form-control" disabled=true  value="{{clientRquest.updateDate | date:'medium'}}">
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-md-6">
+      <h2 class="text text-center">Compras de {{ clientRquest.name }} </h2>
+    </div>
+
+    <div class="mt-4">
+      <button *ngIf="!isEdit" [disabled]="formClientDetail.invalid" class="btn btn-outline-info" (click)="isEditable()">Editar Cliente</button>
+      <button *ngIf="isEdit" style="margin-right: 4px;" (click)="editClient()" class="btn btn-outline-success">Guardar Cambios</button>
+      <button *ngIf="isEdit" style="margin-left: 4px;" class="btn btn-outline-dark" (click)="noEditable()">Cancelar</button>
+    </div>
+  
+  </div>
+
+  
+  <div class="container mt-2" style="display: flex; justify-content: center;">
+    <button class="btn btn-primary" routerLink="/clients/list-clients">Volver a la lista de clientes</button>
+  </div>
+</div>

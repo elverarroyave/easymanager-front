@@ -33,7 +33,6 @@ export class ListProductComponent implements OnInit {
       this.isFirst = data.first;
       this.isLast = data.last;
       this.totalPages = new Array(data.totalPages);
-      console.log(data);
     },
     err=>{
       console.log(err.error);

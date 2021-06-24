@@ -1,0 +1,48 @@
+<div class="class container mt-5">
+  <h1 class="text text-center">
+    Añadir un nuevo cliente
+  </h1>
+  <div class="container user-icon">
+    <img src="../../../assets/user-circle-regular-120.png" alt="">
+  </div>
+
+  <form action="" [formGroup]="formClient">
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <label class="text" for="">Nombres:</label>
+        <input type="text" class="form-control" formControlName="name" placeholder="Ingrese sus nombres...">
+      </div>
+
+      <div class="col-md-6">
+        <label class="text" for="">Apellidos:</label>
+        <input type="text" class="form-control" formControlName="lastName" placeholder="Ingrese sus apellidos...">
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-6">
+        <label class="text" for="">Email:</label>
+        <input type="emial" class="form-control" formControlName="email" placeholder="Ingrese su email...">
+      </div>
+      <div class="col-md-6">
+        <label class="text" for="">Dirrección:</label>
+        <input type="address" class="form-control" formControlName="address" placeholder="Ingrese su direccion...">
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <label class="text" for="">Teléfono:</label>
+        <input type="phone" class="form-control" formControlName="phone" placeholder="Ingrese su número de teléfono...">
+      </div>
+
+      <div class="col-md-4">
+        <label class="text" for="">#Documento:</label>
+        <input type="number" class="form-control" formControlName="document"  placeholder="Ingrese su número de documento...">
+      </div>
+    </div>
+  </form>
+
+  <div class="container mt-5" style="display: flex; justify-content: center;">
+    <button class="btn btn-success" (click)="saveClient()" [disabled]="formClient.invalid" style="margin-right: 4px;">Agregar usuario</button>
+    <button class="btn btn-primary" routerLink="/clients/list-clients" style="margin-left: 4px;">Volver a la lista de usuarios</button>
+  </div>
+</div>

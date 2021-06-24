@@ -57,7 +57,7 @@ export class AddProductComponent implements OnInit {
 
       this.productService.saveProduct(product).subscribe(data=>{
         console.log(data)
-        this.alert.successAlet(`¡Producto Agregado!`,`${product.name} agregado satisfactoriamente. ahora lo puedes ver en tu lista de productos`)
+        this.alert.successAlet(`¡Producto Agregado!`,`${product.name} agregado satisfactoriamente. Ahora lo puedes ver en tu lista de productos.`)
         this.ruta.navigateByUrl('/products/list-products');
         this.formProduct.reset();
       },err =>{

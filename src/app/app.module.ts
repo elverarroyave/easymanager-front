@@ -15,6 +15,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertService } from './services/alert.service';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
+import { ListClientsComponent } from './clients/list-clients/list-clients.component';
+import { AddClientComponent } from './clients/add-client/add-client.component';
+import { ClientDetailComponent } from './clients/client-detail/client-detail.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { ProductDetailComponent } from './products/product-detail/product-detail
     HomeComponent,
     AddProductComponent,
     ListProductComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    ListClientsComponent,
+    AddClientComponent,
+    ClientDetailComponent
   ],
   imports: [
     BrowserModule,

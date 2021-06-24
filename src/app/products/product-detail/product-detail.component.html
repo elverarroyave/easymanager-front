@@ -53,11 +53,11 @@
         <div class="row mt-4">
           <div class="col-sm-6">
             <label class="text">Fecha y hora de creación: </label>
-            <input type="text" class="form-control" formControlName="createdDate" value="{{product.createDate | date:'medium'}}">
+            <input type="text" class="form-control" disabled="true" value="{{product.createDate | date:'medium'}}">
           </div>
           <div class="col-sm-6">
             <label class="text">Fecha de última modificación: </label>
-            <input type="text" class="form-control" formControlName="updatedDate" value="{{product.updateDate | date:'medium'}}">
+            <input type="text" class="form-control" disabled="true" value="{{product.updateDate | date:'medium'}}">
           </div>
         </div>
 
