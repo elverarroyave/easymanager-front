@@ -1,0 +1,48 @@
+<div class="container mt-4">
+  <div class="container mt-4 mb-4">
+    <h2 class="text text-center">Detalles de venta con id: {{idSale}}</h2>
+  </div>
+  <div class="mt-4">
+    <h4 class="text mt-3">Cliente: {{clientRequest.name}} {{clientRequest.lastName}}</h4>
+    <h4 class="text mt-3">Fecha de compra: {{this.clientRequestShopping.createDate | date:'medium'}}</h4>
+    <h4 class="text mt-3">Cantidad de productos comprados: {{amountProducts}}</h4>
+    <h4 class="text mt-5">Total: {{totalPrice | currency:'$'}}</h4>
+  </div>
+  
+  <h3 class="text text-center">Lista de productos</h3>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <td>Código</td>
+          <td>Nombre</td>
+          <td>Cantidad</td>
+          <td>Precio unitario</td>
+          <td>Precio total</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let productDetail of clientRequestShopping.productsDetail; index as i">
+          <th>{{i+1}}</th>
+          <td>{{productDetail.product.code}}</td>
+          <td>{{productDetail.product.name}}</td>
+          <td>{{productDetail.amount}}</td>
+          <td>{{productDetail.product.publicPrice | currency:'$'}}</td>
+          <th>{{productDetail.price | currency:'$'}}</th>
+        </tr>
+      </tbody>
+      <tfoot>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <th><h5 class="text">Total:</h5></th>
+        <th><h5 class="text">{{totalPrice|currency:'$'}}</h5></th>
+      </tfoot>
+    </table>
+  </div>
+  <div style="display: flex; justify-content: center;">
+    <button class="btn btn-primary" (click)="returnClientDetail()">Volver a detalles de cliente</button>
+  </div>
+</div>

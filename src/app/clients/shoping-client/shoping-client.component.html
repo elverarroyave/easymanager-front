@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Id compra</th>
+          <th scope="col">Fehca de compra</th>
+          <th scope="col">Articulos</th>
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="cursor: pointer;" *ngFor="let shopping of shoppingDetail;" (click)="goToSale(shopping.idCompra)">
+          <th scope="row">{{shopping.idCompra}}</th>
+          <td>{{shopping.dateShopping | date:'medium'}}</td>
+          <td>{{shopping.quantityProducts}}</td>
+          <td>{{shopping.total | currency:'$'}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="notShopping" class="mt-2">
+      <h5 class="text text-center">Cliente sin compras...</h5>
+    </div>
+  </div>
+</div>

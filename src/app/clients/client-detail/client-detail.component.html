@@ -13,8 +13,9 @@
 
   <div class="container row">
     <div class="col-md-6">
+      <h4 class="text">Datos Personales</h4>
       <form action="" [formGroup]="formClientDetail">
-        <div class="row mt-4">
+        <div class="row mt-2">
           <div class="col-md-12">
             <label class="text" for="">Nombres:</label>
             <input
@@ -93,12 +94,14 @@
     </div>
 
     <div class="col-md-6">
-      <h2 class="text text-center">Compras de {{ clientRquest.name }} </h2>
+      <h4 class="text text-center">Lista de compras</h4>
+
+      <app-shoping-client [clientIdRequest]="clientId"></app-shoping-client>
     </div>
 
     <div class="mt-4">
-      <button *ngIf="!isEdit" [disabled]="formClientDetail.invalid" class="btn btn-outline-info" (click)="isEditable()">Editar Cliente</button>
-      <button *ngIf="isEdit" style="margin-right: 4px;" (click)="editClient()" class="btn btn-outline-success">Guardar Cambios</button>
+      <button *ngIf="!isEdit" class="btn btn-outline-info" (click)="isEditable()">Editar Cliente</button>
+      <button *ngIf="isEdit" [disabled]="formClientDetail.invalid" style="margin-right: 4px;" (click)="editClient()" class="btn btn-outline-success">Guardar Cambios</button>
       <button *ngIf="isEdit" style="margin-left: 4px;" class="btn btn-outline-dark" (click)="noEditable()">Cancelar</button>
     </div>
   

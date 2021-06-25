@@ -23,12 +23,12 @@ export class AddClientComponent implements OnInit {
 
   ngOnInit(): void {
     this.formClient = this.fb.group({
-      name:['Sara Sofia', Validators.required],
-      lastName:['Arrieta Rojas', Validators.required],
-      email:['sara123@gmail.com', Validators.compose([Validators.required, Validators.email])],
-      address:['Calle 26#26 a 52', Validators.required],
-      phone:['3207859665'],
-      document:['987654321']
+      name:['', Validators.required],
+      lastName:['', Validators.required],
+      email:['', Validators.compose([Validators.required, Validators.email])],
+      address:['', Validators.required],
+      phone:[''],
+      document:['']
     })
   }
 

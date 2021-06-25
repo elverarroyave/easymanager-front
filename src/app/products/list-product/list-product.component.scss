@@ -10,6 +10,12 @@
 }
 
 .card{
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   height: 100%;
+  transition: height .5s;
+}
+
+.card:hover{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  height: 102%;
 }
