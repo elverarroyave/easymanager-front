@@ -11,7 +11,7 @@ export class ListProductComponent implements OnInit {
   constructor(private productsService: ProductsService) { }
 
   page: number=0;
-  size: number=8;
+  size: number=12;
   order: string= 'name';
   asc: boolean= false;
 
@@ -29,21 +29,16 @@ export class ListProductComponent implements OnInit {
 
   loadProducts(){
     this.productsService.productsByPages(this.page, this.order, this.size, this.asc).subscribe(data=>{
-      this.products = data.content;
+      console.log(data.content)
+      this.products = this.products.concat(data.content);
       this.isFirst = data.first;
       this.isLast = data.last;
       this.totalPages = new Array(data.totalPages);
+      console.log(this.products)
     },
     err=>{
       console.log(err.error);
     })
-  }
-
-  rewind(){
-    if(!this.isFirst){
-      this.page--;
-      this.loadProducts();
-    }
   }
 
   forward(){
@@ -56,14 +51,6 @@ export class ListProductComponent implements OnInit {
   setNumberPage(page: number){
     this.page = page
     this.loadProducts();
-  }
-
-  accion(event){
-    if(event == 'eliminar'){
-      console.log('Click en Eliminar')
-    }else{
-      console.log('Click en body')
-    }
   }
 
 

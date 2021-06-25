@@ -2,8 +2,8 @@
   <h1 class="text">Lista de todos los productos</h1>
   <div class="row mt-3" style="display: flex; justify-content: center;">
 
-    <div class="col-sm-auto mt-2 mb-4" *ngFor='let product of products'>
-      <div class="card" style="width: 18rem; cursor: pointer;" routerLink="/products/product-detail/{{product.id}}">
+    <div class="col-md-3 mt-2 mb-4" *ngFor='let product of products'>
+      <div class="card" style="width: auto; cursor: pointer;" routerLink="/products/product-detail/{{product.id}}">
         <img 
         src="../../../assets/product-icon.jpg"  
         class="card-img-top" 
@@ -22,15 +22,11 @@
 
     <div class="text-pagination text-center">
       <div>
-        <i style="cursor: pointer; margin-right: 10px;" (click)="rewind()" *ngIf="!isFirst" class='bx bxs-chevrons-left'></i>
-      </div>
-      <span class="text">Página: </span>
-      <span class="text" *ngFor="let p of totalPages; let i=index">
-        <i style="cursor: pointer; margin-right: 5px;" [ngClass]="{'text-primary': i===page}" (click)="setNumberPage(i)">{{i+1}}</i>
-      </span>
-      <span class="text"> ... de: {{totalPages.length}}</span>
-      <div>
-        <i style="cursor: pointer; margin-left: 10px;" (click)="forward()" *ngIf="!isLast" class='bx bxs-chevrons-right'></i>
+        <button class="btn btn-outline-primary rounded-pill" (click)="forward()" *ngIf="!isLast">
+          <i class='bx bx-chevron-down-circle bx-burst' ></i>
+          <span style="margin: 10px;">Ver más</span>
+          <i class='bx bx-chevron-down-circle bx-burst' ></i>
+        </button>
       </div>
     </div>
 
