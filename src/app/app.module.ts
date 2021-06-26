@@ -20,6 +20,8 @@ import { AddClientComponent } from './clients/add-client/add-client.component';
 import { ClientDetailComponent } from './clients/client-detail/client-detail.component';
 import { ShopingClientComponent } from './clients/shoping-client/shoping-client.component';
 import { ClientDetailShoppingComponent } from './clients/client-detail-shopping/client-detail-shopping.component';
+import { NewSaleComponent } from './sales/new-sale/new-sale.component';
+import { SalesConsultComponent } from './sales/sales-consult/sales-consult.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { ClientDetailShoppingComponent } from './clients/client-detail-shopping/
     AddClientComponent,
     ClientDetailComponent,
     ShopingClientComponent,
-    ClientDetailShoppingComponent
+    ClientDetailShoppingComponent,
+    NewSaleComponent,
+    SalesConsultComponent
   ],
   imports: [
     BrowserModule,

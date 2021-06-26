@@ -8,6 +8,8 @@ import { HomeComponent } from './home/home.component';
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { ListProductComponent } from './products/list-product/list-product.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
+import { NewSaleComponent } from './sales/new-sale/new-sale.component';
+import { SalesConsultComponent } from './sales/sales-consult/sales-consult.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,7 +19,9 @@ const routes: Routes = [
   { path: 'clients/list-clients', component: ListClientsComponent },
   { path: 'clients/add-client', component: AddClientComponent},
   { path: 'clients/client-detail/:id', component: ClientDetailComponent},
-  { path: 'clients/client-detail/:id/sale/:idSale', component: ClientDetailShoppingComponent}
+  { path: 'clients/client-detail/:id/sale/:idSale', component: ClientDetailShoppingComponent},
+  { path: 'sales/new', component: NewSaleComponent},
+  { path: 'sales/salesConsult', component: SalesConsultComponent}
 ];
 
 @NgModule({

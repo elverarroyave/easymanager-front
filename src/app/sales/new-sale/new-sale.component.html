@@ -1,0 +1,109 @@
+<div class="container mt-2">
+  <div class="container">
+    <h5 class="text" style="text-align: right">
+      Fecha: {{ currentDate | date: "mediumDate" }}
+    </h5>
+  </div>
+  <h1 class="text text-center">Nueva venta</h1>
+  <div class="container row">
+    <h5 class="text">Datos de Cliente</h5>
+    <div class="col-md-4">
+      <form action="">
+        <label class="text" for="">Documento:</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Ingresa el número de documento..."
+        />
+      </form>
+    </div>
+    <div class="mt-1 mb-1">
+      <button class="btn btn-outline-primary">Buscar</button>
+    </div>
+  </div>
+  <div class="row container mt-2">
+    <div class="col-md-5">
+      <form action="">
+        <label class="text" for="">Nombre:</label>
+        <input type="text" disabled="true" class="form-control" />
+      </form>
+    </div>
+    <div class="col-md-4">
+      <label class="text" for="">Dirección:</label>
+      <input class="form-control" disabled="true" type="email" />
+    </div>
+    <div class="col-md-3">
+      <form action="">
+        <label class="text" for="">Teléfono:</label>
+        <input type="phone" disabled="true" class="form-control" />
+      </form>
+    </div>
+  </div>
+
+  <div class="container">
+    <hr class="solid" />
+  </div>
+
+  <div class="container row">
+    <h5 class="text">Producto</h5>
+    <div class="col-md-3">
+      <form action="">
+        <label class="text" for="">Código de producto:</label>
+        <input type="text" class="form-control" />
+      </form>
+    </div>
+    <div class="col-md-5">
+      <form action="">
+        <label for="" class="text">Nombre del producto:</label>
+        <input type="text" class="form-control" disabled="true" />
+      </form>
+    </div>
+    <div class="col-md-2">
+      <form action="">
+        <label for="" class="text">Stock:</label>
+        <input type="number" class="form-control" disabled="true" />
+      </form>
+    </div>
+    <div class="col-md-2">
+      <form action="">
+        <label for="" class="text">Precio:</label>
+        <input type="number" class="form-control" disabled="true" />
+      </form>
+    </div>
+    <div class="mt-1 mb-3">
+      <button class="btn btn-outline-primary">Buscar</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <hr class="solid" />
+  </div>
+
+  <div class="table-responsive">
+    <h4 class="text text-center">Detalles de compra</h4>
+    <table class="table table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <td>Código</td>
+          <td>Nombre</td>
+          <td>Cantidad</td>
+          <td>Precio unitario</td>
+          <td>Precio total</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>99</th>
+          <td>RG235645</td>
+          <td>Pegante en barra pegajoso</td>
+          <td><input style="max-width: 150px;" type="number" class="form-control" value="2"></td>
+          <td>$2500,00</td>
+          <th>$5.000,00</th>
+          <td style="padding: 4px 0;"><button class="btn btn-outline-danger" style="padding-top: 4px;padding-bottom: 4px"><i class='bx bxs-trash' size="lg"  ></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

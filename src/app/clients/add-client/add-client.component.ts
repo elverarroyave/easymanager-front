@@ -44,6 +44,7 @@ export class AddClientComponent implements OnInit {
 
     this.clientsService.saveClient(this.client).subscribe(data =>{
       this.alertService.successAlet('¡Cliente Agregado!', `${this.client.name}, agregado correctamente.`)
+      this.formClient.reset();
     },err=>{
       this.alertService.errorAlert('Opss', `${err.error}`)
       console.log(err)

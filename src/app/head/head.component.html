@@ -9,8 +9,14 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/" (click)="isCollapsed = false">Inicio</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled"  style="cursor: pointer;" (click)="isCollapsed = false">Venta</a>
+        <li class="nav-item dropdown" dropdown>
+          <a class="nav-link dropdown-toggle" dropdownToggle id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Venta
+          </a>
+          <ul class="dropdown-menu" *dropdownMenu aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" routerLink="/sales/new" style="cursor: pointer;" (click)="isCollapsed = false">Nueva venta</a></li>
+            <li><a class="dropdown-item" routerLink="/sales/salesConsult" style="cursor: pointer;" (click)="isCollapsed = false">Consultar ventas</a></li>
+          </ul>
         </li>
         <li class="nav-item dropdown" dropdown>
           <a class="nav-link dropdown-toggle" dropdownToggle id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -18,7 +24,6 @@
           </a>
           <ul class="dropdown-menu" *dropdownMenu aria-labelledby="navbarScrollingDropdown">
             <li><a class="dropdown-item" style="cursor: pointer;" (click)="isCollapsed = false" routerLink="/products/add-product">Añadir nuevo</a></li>
-            <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" style="cursor: pointer;" (click)="isCollapsed = false" routerLink="/products/list-products">Ver todos</a></li>
           </ul>
         </li>
@@ -28,8 +33,35 @@
           </a>
           <ul class="dropdown-menu" *dropdownMenu aria-labelledby="navbarScrollingDropdown">
             <li><a class="dropdown-item" style="cursor: pointer;" (click)="isCollapsed = false" routerLink="/clients/add-client">Añadir nuevo</a></li>
-            <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" style="cursor: pointer;" (click)="isCollapsed = false" routerLink="/clients/list-clients">Ver todos</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" dropdown>
+          <a class="nav-link dropdown-toggle" dropdownToggle id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Pedidos
+          </a>
+          <ul class="dropdown-menu" *dropdownMenu aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="isCollapsed = false">Crear pedido</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="isCollapsed = false">Ver estado de pedido</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="isCollapsed = false">Consultar pedidos</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" dropdown>
+          <a class="nav-link dropdown-toggle" dropdownToggle id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Distribudores
+          </a>
+          <ul class="dropdown-menu" *dropdownMenu aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="isCollapsed = false">Añadir nuevo</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="isCollapsed = false">Ver todos</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" dropdown>
+          <a class="nav-link dropdown-toggle" dropdownToggle id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Gestion
+          </a>
+          <ul class="dropdown-menu" *dropdownMenu aria-labelledby="navbarScrollingDropdown">
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="isCollapsed = false">Usuarios</a></li>
+            <li><a class="dropdown-item" style="cursor: pointer;" (click)="isCollapsed = false">Roles de Usuarios</a></li>
           </ul>
         </li>
         <li class="nav-item">
