@@ -23,7 +23,7 @@ export class ClientsService {
   }
 
   public findByDocument(numDocument: string){
-    return this.httpClient.get<any>(this.httpClient + 'document' + numDocument);
+    return this.httpClient.get<any>(this.URLClient + 'document/' + numDocument);
   }
 
   public updateClient(id: number, client:Client){

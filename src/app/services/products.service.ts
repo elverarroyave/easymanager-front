@@ -31,4 +31,8 @@ export class ProductsService {
     return this.httpClient.delete(this.productsURL + id);
   }
 
+  public findByCode(code:string): Observable<any>{
+    return this.httpClient.get<any>(this.productsURL + 'code/' + code);
+  }
+
 }
