@@ -25,11 +25,11 @@
       <tbody>
         <tr *ngFor="let productDetail of clientRequestShopping.productsDetail; index as i">
           <th>{{i+1}}</th>
-          <td>{{productDetail.product.code}}</td>
-          <td>{{productDetail.product.name}}</td>
+          <td>{{productDetail.codeProduct}}</td>
+          <td>{{productDetail.nameProduct}}</td>
           <td>{{productDetail.amount}}</td>
-          <td>{{productDetail.product.publicPrice | currency:'$'}}</td>
-          <th>{{productDetail.price | currency:'$'}}</th>
+          <td>{{productDetail.publicPriceProduct | currency:'$'}}</td>
+          <th>{{productDetail.totalSale | currency:'$'}}</th>
         </tr>
       </tbody>
       <tfoot>

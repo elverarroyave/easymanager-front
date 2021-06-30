@@ -16,7 +16,7 @@ export class SaleService {
   }
 
   public findByDateRange(finalDate: string, initDate: String){
-    console.log(this.URLsale + `?finalDate=${finalDate}` + `&initDate=${initDate}`)
+    //console.log(this.URLsale + `?finalDate=${finalDate}` + `&initDate=${initDate}`)
     return this.httpClient.get<any>(this.URLsale + `?finalDate=${finalDate}` + `&initDate=${initDate}`)
   }
 }

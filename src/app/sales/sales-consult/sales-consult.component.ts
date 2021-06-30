@@ -59,6 +59,7 @@ export class SalesConsultComponent implements OnInit {
     this.salesRequest.length = 0;
     this.saleService.findByDateRange(initDate,finalDate).subscribe(data=>{
       this.salesRequest = data
+      console.log(this.salesRequest)
       this. loadSalesInTable();
     },err=>{
       console.log(err)
@@ -73,7 +74,7 @@ export class SalesConsultComponent implements OnInit {
       let total: number = 0;
       sale.productsDetail.forEach(p=>{
         amount += p.amount;
-        total += p.price;
+        total += p.totalSale;
       })
       let saleInTable: SaleInTable = new SaleInTable(
         sale.id,

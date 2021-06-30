@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClientRequestShopping } from 'src/app/model/ClientRequestShopping';
 import { ClientsService } from 'src/app/services/clients.service';
-import { Tools } from 'src/app/tools/Tools';
 import { ShoppingInTable } from './modelShopping/ShoppingInTable';
 
 @Component({
@@ -17,16 +16,12 @@ export class ShopingClientComponent implements OnInit {
   shoppingDetail: Array<ShoppingInTable>=[]; 
   notShopping: boolean = false;
 
-  tools: Tools = new Tools();
-
   constructor(
     private clientService: ClientsService,
     private router: Router
     ) { }
 
   ngOnInit(): void {
-    console.log(this.clientIdRequest)
-
     //Cargar datos del cliente
     const id: number = parseInt(this.clientIdRequest);
     this.clientService.findById(id).subscribe(data=>{
@@ -44,12 +39,12 @@ export class ShopingClientComponent implements OnInit {
         let totalInShopping = 0;
         let totalProducts = 0;
         shopp.productsDetail.forEach(productDetail=>{
-          totalInShopping += productDetail.price;
+          totalInShopping += productDetail.totalSale;
           totalProducts += productDetail.amount
         })
         let shoppingInTable = new ShoppingInTable(
           shopp.id,
-          this.tools.dateFormat(shopp.createDate),
+          shopp.createDate,
           totalProducts,
           totalInShopping
           );
@@ -64,7 +59,6 @@ export class ShopingClientComponent implements OnInit {
   }
 
   goToSale(id){
-    console.log('Yendo a la ruta con id:' + id)
     this.router.navigateByUrl(`/clients/client-detail/${this.clientIdRequest}/sale/${id}`)
   }
 
