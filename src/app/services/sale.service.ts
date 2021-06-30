@@ -9,9 +9,14 @@ export class SaleService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private URLsale:string = "http://localhost:8080/api/v1/sales?numDocument=";
+  private URLsale:string = "http://localhost:8080/api/v1/sales";
 
   public createSale(numDocument: string, productsResponse: Array<ProductoResponse>){
-    return this.httpClient.post<any>(this.URLsale + numDocument, productsResponse);
+    return this.httpClient.post<any>(this.URLsale + '?numDocument=' + numDocument, productsResponse);
+  }
+
+  public findByDateRange(finalDate: string, initDate: String){
+    console.log(this.URLsale + `?finalDate=${finalDate}` + `&initDate=${initDate}`)
+    return this.httpClient.get<any>(this.URLsale + `?finalDate=${finalDate}` + `&initDate=${initDate}`)
   }
 }

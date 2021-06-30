@@ -57,7 +57,7 @@ export class ShopingClientComponent implements OnInit {
           shoppingInTable
         )
       })
-      console.log(this.shoppingDetail)
+      this.shoppingDetail.reverse();
     }else{
       this.notShopping = true;
     }

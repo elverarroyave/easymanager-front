@@ -63,7 +63,6 @@ export class NewSaleComponent implements OnInit {
     //ActiveBtnShopping
     this.isActiveBtnShopping =
       this.productsInTable.length != 0 && this.clientRequest.id != 0;
-    console.log('ngDoCheck');
   }
 
   //formulario de cliente
@@ -84,7 +83,6 @@ export class NewSaleComponent implements OnInit {
     this.clientsService.findByDocument(numDocument).subscribe(
       (data) => {
         this.clientRequest = data.content[0];
-        console.log(this.clientRequest);
       },
       (err) => {
         console.log(err);
@@ -129,6 +127,7 @@ export class NewSaleComponent implements OnInit {
       this.productsInTable.push(productInTable);
     }
     this.updateTotal();
+    this.productsInTable.reverse();
   }
 
   playShopping() {
@@ -143,7 +142,7 @@ export class NewSaleComponent implements OnInit {
         this.createShopping();
         Swal.fire('Compra Realizada!', '', 'success');
       } else if (result.isDenied) {
-        Swal.fire('No eliminado', '', 'warning');
+        Swal.fire('Compra cancelada', '', 'warning');
       }
     });
   }
@@ -157,8 +156,6 @@ export class NewSaleComponent implements OnInit {
       );
       this.productsResponse.push(productResponse);
     });
-    console.log('client: ' + this.clientRequest.numDocument);
-    console.log(this.productsResponse);
 
     this.saleService
       .createSale(this.clientRequest.numDocument, this.productsResponse)
@@ -169,7 +166,7 @@ export class NewSaleComponent implements OnInit {
           this.clientRequest = new ClientRequest();
           this.productRequest = new ProductRequest();
           this.totalSalePrice=0;
-          this.formGroupClient.reset;
+          this.formGroupClient.reset();
         },
         (err) => {
           console.log(err);

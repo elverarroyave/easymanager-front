@@ -62,7 +62,7 @@ export class ClientDetailShoppingComponent implements OnInit {
       console.log(this.amountProducts, this.totalPrice)
     })
 
-    console.log(this.clientRequestShopping)
+    this.clientRequestShopping.productsDetail.reverse();
   }
 
   returnClientDetail(){

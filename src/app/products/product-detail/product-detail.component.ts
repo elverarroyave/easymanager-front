@@ -72,7 +72,6 @@ export class ProductDetailComponent implements OnInit {
     })
   }
 
-
   private dateFormat(date: string): string{
     let dateFormat = new Date(
       parseInt(date.substring(0,4)),

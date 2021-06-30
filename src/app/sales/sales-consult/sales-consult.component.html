@@ -1,3 +1,95 @@
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
   <h1 class="text text-center">Apartado para consultar las ventas</h1>
+  <div class="container mt-4">
+    <h5 class="text">Rango a consultar:</h5>
+    <button class="btn btn-outline-primary" style="margin-right: 10px; margin-top: 5px;" (click)="consultByDies(0)">
+      Hoy
+    </button>
+    <button class="btn btn-outline-secondary" style="margin-right: 10px; margin-top: 5px;" (click)="consultByDies(7)">
+      Última semana
+    </button>
+    <button class="btn btn-outline-warning" style="margin-right: 10px; margin-top: 5px;" (click)="consultByDies(15)">
+      Última quincena
+    </button>
+    <button class="btn btn-outline-info" style="margin-right: 10px; margin-top: 5px;" (click)="consultByDies(30)">
+      Último mes
+    </button>
+    <button
+      class="btn btn-outline-dark"
+      (click)="btnOtherRange()"
+      style="margin-right: 10px; margin-top: 5px;"
+    >
+      Otro
+    </button>
+  </div>
+  <div class="container mt-4" *ngIf="otherRange">
+    <h5 class="text text-center">Seleccione el rango de fechas a consultar</h5>
+    <form
+      [formGroup]="formDateGroup"
+      style="display: flex; justify-content: center"
+    >
+      <div class="row">
+        <div class="col-md-6 mt-2">
+          <label class="text" for="">Fecha de inicio:</label>
+          <input type="date" class="form-control" formControlName="initDate" />
+        </div>
+        <div class="col-md-6 mt-2">
+          <label class="text" for="">Fecha final:</label>
+          <input type="date" class="form-control" formControlName="finalDate" />
+        </div>
+      </div>
+    </form>
+    <div class="container mt-4" style="display: flex; justify-content: center">
+      <button
+        class="btn btn-dark"
+        (click)="consultByOther()"
+        [disabled]="formDateGroup.invalid"
+      >
+        Consultar
+      </button>
+    </div>
+  </div>
+  <div class="container mt-4">
+    <h4 class="text">Lista de ventas</h4>
+
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Id venta</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Empleado</th>
+            <th scope="col">Cant. productos</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let sale of salesInTable; index as i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{sale.id}}</td>
+            <td>{{sale.createDate | date:'medium'}}</td>
+            <td>{{sale.user}}</td>
+            <td>{{sale.amount}}</td>
+            <th scope="row">{{sale.total | currency:'$'}}</th>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th><h5 class="text" style="text-align: right;">Total:</h5></th>
+            <th>
+              <h5 class="text">{{ totalSalesPrice | currency: "$" }}</h5>
+            </th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+  <div class="container" style="display: flex; justify-content: center;">
+    <button class="btn btn-primary" routerLink="/sales/new">Nueva Venta</button>
+  </div>
 </div>
