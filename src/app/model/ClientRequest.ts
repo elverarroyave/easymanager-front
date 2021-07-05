@@ -1,5 +1,3 @@
-import { ClientRequestShopping } from "./ClientRequestShopping";
-
 export class ClientRequest{
   id: number;
   name: string;
@@ -8,7 +6,6 @@ export class ClientRequest{
   address: string;
   numPhone: string;
   numDocument: string;
-  shopping: Array<ClientRequestShopping>;
   createDate: string;
   updateDate: string;
   link: Array<any>;
@@ -21,7 +18,6 @@ export class ClientRequest{
     this.address=''
     this.numPhone=''
     this.numDocument=''
-    this.shopping=[]
     this.createDate=''
     this.updateDate=''
     this.link=[]

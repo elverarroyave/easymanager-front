@@ -1,0 +1,46 @@
+.apartado{
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  cursor: pointer;
+  transition: transform .5s;
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.title-card{
+  color: #333333;
+  text-shadow: 1px 1px 0px #6b6a6a3d, 3px 2px 0px rgba(0,0,0,0.15);
+}
+
+.apartado#sale{
+  background-color: #FFE53B;
+  background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%);
+}
+
+.apartado#sale-consult{
+  background-color: #74EBD5;
+  background-image: linear-gradient(90deg, #74EBD5 0%, #9FACE6 100%);
+}
+
+.apartado#product-consult{
+  background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%);
+}
+
+.apartado#new-product{
+  background-image: linear-gradient( 135deg, #F0FF00 10%, #58CFFB 100%);
+}
+
+.apartado#client-consult{
+  background-image: linear-gradient( 135deg, #FFAA85 10%, #B3315F 100%);
+}
+
+.apartado#add-client{
+  background-image: linear-gradient( 135deg, #90F7EC 10%, #32CCBC 100%);
+}
+
+
+.title{
+  text-shadow: 1px 1px 0px #6b6a6a3d, 5px 4px 0px rgba(0,0,0,0.15);
+}

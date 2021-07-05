@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClientsService } from 'src/app/services/clients.service';
 
@@ -21,9 +22,20 @@ export class ListClientsComponent implements OnInit {
 
   clients: Array<any> = [];
 
-  constructor(private clientsService: ClientsService, private router: Router) { }
+  formSize: FormGroup;
+
+  constructor(private clientsService: ClientsService, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.loadClients();
+
+    this.formSize=this.fb.group({
+      size:['10'],
+    });
+  }
+
+  setSize(){
+    this.size = parseInt(this.formSize.value.size)
     this.loadClients();
   }
 
@@ -33,20 +45,24 @@ export class ListClientsComponent implements OnInit {
       this.isFirst = data.first;
       this.isLast = data.last;
       this.totalPages = new Array(data.totalPages)
+      //console.log(data)
     })
   }
 
   sort(){
     this.asc = !this.asc
     this.loadClients();  
-    console.log('Click en sort', this.asc)
+  }
+
+  orderBy(parameter: string){
+    this.order = parameter;
+    this.sort();
   }
 
   rewind(){
     if(!this.isFirst){
       this.page--;
       this.loadClients();
-      console.log('Rewind')
     }
   }
 
@@ -54,7 +70,6 @@ export class ListClientsComponent implements OnInit {
     if(!this.isLast){
       this.page++;
       this.loadClients();
-      console.log('Forward')
     }
   }
 

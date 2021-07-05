@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ClientRequest } from 'src/app/model/ClientRequest';
+import { SaleRequest } from 'src/app/sales/sale-consult-detail/modelSale/saleRequest';
 
-import { ClientRequestShopping } from 'src/app/model/ClientRequestShopping';
-import { ClientsService } from 'src/app/services/clients.service';
+import { SaleService } from 'src/app/services/sale.service';
+import { Tools } from 'src/app/tools/Tools';
 
 @Component({
   selector: 'app-client-detail-shopping',
@@ -12,18 +12,19 @@ import { ClientsService } from 'src/app/services/clients.service';
 })
 export class ClientDetailShoppingComponent implements OnInit {
 
-  clientRequest: ClientRequest = new ClientRequest();
-  clientRequestShopping: ClientRequestShopping = new ClientRequestShopping();
-
   idClient: number;
   idSale: number;
 
-  amountProducts: number=0;
-  totalPrice: number=0
+  saleRequest: SaleRequest = new SaleRequest();
+
+  tools: Tools = new Tools();
+  saleCreateDate="";
+  amountProductsSale: number=0;
+  totalPriceSale: number=0
 
   constructor(
       private activedRouter: ActivatedRoute,
-      private clientsService: ClientsService,
+      private saleService: SaleService,
       private router: Router
     ) { }
 
@@ -35,8 +36,9 @@ export class ClientDetailShoppingComponent implements OnInit {
 
   private loadData(){
     //Traer datos del servidor
-    this.clientsService.findById(this.idClient).subscribe(data=>{
-      this.clientRequest = data.content[0];
+    this.saleService.findById(this.idSale).subscribe(data=>{
+      this.saleRequest = data;
+      //console.log(this.clientRequest)
       this.loadDataCurrentShopping();
     },err=>{
       console.log(err)
@@ -44,14 +46,11 @@ export class ClientDetailShoppingComponent implements OnInit {
   }
 
   private loadDataCurrentShopping(){
-    let shop = this.clientRequest.shopping.filter(shop=>shop.id==this.idSale);
-    this.clientRequestShopping = shop[0] as ClientRequestShopping;
-
-    //Capturando cantidad de productos comprados y el totalPrice.
-    this.clientRequestShopping.productsDetail.forEach(productDetail=>{
-      this.amountProducts += productDetail.amount;
-      this.totalPrice += productDetail.totalSale;
-    })
+    this.saleCreateDate = this.tools.dateFormat(this.saleRequest.createDate);
+    this.saleRequest.productsDetail.forEach(p=>{
+      this.totalPriceSale+=p.totalSale
+      this.amountProductsSale+=p.amount
+    });
   }
 
   returnClientDetail(){

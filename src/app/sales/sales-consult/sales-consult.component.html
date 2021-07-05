@@ -60,22 +60,25 @@
             <th scope="col">Id venta</th>
             <th scope="col">Fecha</th>
             <th scope="col">Empleado</th>
+            <th scope="col">Cliente</th>
             <th scope="col">Cant. productos</th>
             <th scope="col">Total</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let sale of salesInTable; index as i">
+          <tr *ngFor="let sale of salesInTable; index as i" style="cursor: pointer;" (click)="goToSale(sale.id)">
             <th scope="row">{{i+1}}</th>
             <td>{{sale.id}}</td>
             <td>{{sale.createDate | date:'medium'}}</td>
-            <td>{{sale.user}}</td>
+            <td>{{sale.userDocument}}</td>
+            <td>{{sale.clientDocument}}</td>
             <td>{{sale.amount}}</td>
             <th scope="row">{{sale.total | currency:'$'}}</th>
           </tr>
         </tbody>
         <tfoot>
           <tr>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>

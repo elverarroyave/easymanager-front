@@ -5,7 +5,7 @@ export class SaleRequest{
   createDate: string;
   updateDate: string;
   productsDetail: Array<ProductDetailRequest>;
-  user: any
+  userId: number
 
 
   constructor(){
@@ -13,7 +13,7 @@ export class SaleRequest{
     this.createDate=""
     this.updateDate=""
     this.productsDetail=[]
-    this.user=undefined;
+    this.userId;
   }
 }
 

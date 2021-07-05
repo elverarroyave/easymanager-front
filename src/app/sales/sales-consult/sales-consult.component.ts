@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SaleService } from 'src/app/services/sale.service';
-import { Tools } from 'src/app/tools/Tools';
 import { SaleInTable } from './model-sales-consult/SaleInTable';
-import { SaleRequest } from './model-sales-consult/SaleRequest';
+
 
 @Component({
   selector: 'app-sales-consult',
@@ -16,13 +16,13 @@ export class SalesConsultComponent implements OnInit {
   formDateGroup: FormGroup;
 
   //Sales
-  salesRequest: Array<SaleRequest> = new Array<SaleRequest>();
+  salesRequest: Array<any> = new Array<any>();
 
   salesInTable: Array<SaleInTable> = new Array<SaleInTable>();
 
   totalSalesPrice: number=0;
 
-  constructor(private fb: FormBuilder, private saleService: SaleService) { }
+  constructor(private fb: FormBuilder, private saleService: SaleService, private router: Router) { }
 
   otherRange: boolean = false;
 
@@ -59,7 +59,7 @@ export class SalesConsultComponent implements OnInit {
     this.salesRequest.length = 0;
     this.saleService.findByDateRange(initDate,finalDate).subscribe(data=>{
       this.salesRequest = data
-      console.log(this.salesRequest)
+      //console.log(this.salesRequest)
       this. loadSalesInTable();
     },err=>{
       console.log(err)
@@ -79,7 +79,8 @@ export class SalesConsultComponent implements OnInit {
       let saleInTable: SaleInTable = new SaleInTable(
         sale.id,
         sale.createDate,
-        sale.user.name,
+        sale.user.document,
+        sale.client.document,
         amount,
         total
       )
@@ -87,6 +88,10 @@ export class SalesConsultComponent implements OnInit {
       this.totalSalesPrice += total;
     })
     this.salesInTable.reverse();
+  }
+
+  goToSale(id: number){
+    this.router.navigateByUrl('/sales/saleConsultDetail/'+id);
   }
 
 }

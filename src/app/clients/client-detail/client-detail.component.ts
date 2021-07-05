@@ -6,6 +6,7 @@ import { ClientRequest } from 'src/app/model/ClientRequest';
 import { AlertService } from 'src/app/services/alert.service';
 
 import { ClientsService } from 'src/app/services/clients.service';
+import { Tools } from 'src/app/tools/Tools';
 
 @Component({
   selector: 'app-client-detail',
@@ -17,6 +18,8 @@ export class ClientDetailComponent implements OnInit {
   formClientDetail: FormGroup;
   clientRquest: ClientRequest = new ClientRequest();
   clientId: string;
+  
+  tools: Tools = new Tools();
 
   isEdit: boolean = false;
 
@@ -65,24 +68,12 @@ export class ClientDetailComponent implements OnInit {
       phone: this.clientRquest.numPhone,
       document: this.clientRquest.numDocument,
     });
-    this.clientRquest.createDate = this.dateFormat(
+    this.clientRquest.createDate = this.tools.dateFormat(
       this.clientRquest.createDate
     );
-    this.clientRquest.updateDate = this.dateFormat(
+    this.clientRquest.updateDate = this.tools.dateFormat(
       this.clientRquest.updateDate
     );
-  }
-
-  private dateFormat(date: string): string {
-    let dateFormat = new Date(
-      parseInt(date.substring(0, 4)),
-      parseInt(date.substring(5, 7)),
-      parseInt(date.substring(8, 10)),
-      parseInt(date.substring(11, 13)),
-      parseInt(date.substring(14, 16)),
-      parseInt(date.substring(17, 19))
-    );
-    return dateFormat.toString();
   }
 
   editClient() {

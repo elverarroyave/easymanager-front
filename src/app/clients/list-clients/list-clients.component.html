@@ -1,12 +1,25 @@
 <div class="container mt-5">
   <h1 class="text text-center">Lista de todos los clientes</h1>
-  <div class="table-responsive mt-5">
+  <div class="col-md-4 mt-4">
+    <form [formGroup]="formSize" action="">
+      <div class="form-group">
+        <label class="text" for="">Cantidad de resultados por página:</label>
+        <select class="" formControlName="size" (change)="setSize()" style="margin-left: 10px;">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="table-responsive mt-2">
     <table class="table table-striped table-hover">
       <thead class="table-dark">
         <tr>
-          <th scope="col">Id</th>
-          <th scope="col">Apellidos</th>
-          <th scope="col">Nombres</th>
+          <th scope="col">Id <span style="cursor:pointer;" (click)="orderBy('id')"><i class='bx bx-sort'></i></span></th>
+          <th scope="col">Apellidos <span style="cursor:pointer;" (click)="orderBy('lastName')"><i class='bx bx-sort'></i></span></th>
+          <th scope="col">Nombres <span style="cursor:pointer;" (click)="orderBy('name')"><i class='bx bx-sort'></i></span></th>
           <th scope="col">Documento</th>
           <th scope="col">Teléfono</th>
           <th scope="col">Email</th>
@@ -26,17 +39,13 @@
       </tbody>
     </table>
     <div class="text-pagination text-center">
-      <div>
         <i style="cursor: pointer; margin-right: 10px;" (click)="rewind()" *ngIf="!isFirst" class='bx bxs-chevrons-left'></i>
-      </div>
       <span class="text">Página: </span>
       <span class="text" *ngFor="let p of totalPages; let i=index">
         <i style="cursor: pointer; margin-right: 5px;" [ngClass]="{'text-primary': i===page}" (click)="setNumberPage(i)">{{i+1}}</i>
       </span>
       <span class="text"> ... de: {{totalPages.length}}</span>
-      <div>
         <i style="cursor: pointer; margin-left: 10px;" (click)="forward()" *ngIf="!isLast" class='bx bxs-chevrons-right'></i>
-      </div>
     </div>
   </div>
 </div>

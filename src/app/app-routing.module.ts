@@ -9,6 +9,7 @@ import { AddProductComponent } from './products/add-product/add-product.componen
 import { ListProductComponent } from './products/list-product/list-product.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { NewSaleComponent } from './sales/new-sale/new-sale.component';
+import { SaleConsultDetailComponent } from './sales/sale-consult-detail/sale-consult-detail.component';
 import { SalesConsultComponent } from './sales/sales-consult/sales-consult.component';
 
 const routes: Routes = [
@@ -21,7 +22,9 @@ const routes: Routes = [
   { path: 'clients/client-detail/:id', component: ClientDetailComponent},
   { path: 'clients/client-detail/:id/sale/:idSale', component: ClientDetailShoppingComponent},
   { path: 'sales/new', component: NewSaleComponent},
-  { path: 'sales/salesConsult', component: SalesConsultComponent}
+  { path: 'sales/salesConsult', component: SalesConsultComponent},
+  { path: 'sales/saleConsultDetail/:id', component: SaleConsultDetailComponent}
+
 ];
 
 @NgModule({

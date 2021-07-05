@@ -140,7 +140,7 @@ export class NewSaleComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.createShopping();
-        Swal.fire('Compra Realizada!', '', 'success');
+        Swal.fire('Venta Realizada!', '', 'success');
       } else if (result.isDenied) {
         Swal.fire('Compra cancelada', '', 'warning');
       }
@@ -161,7 +161,6 @@ export class NewSaleComponent implements OnInit {
       .createSale(this.clientRequest.numDocument, this.productsResponse)
       .subscribe(
         (data) => {
-          this.alert.successAlet('Venta exitosa!', '');
           this.productsInTable.length = 0;
           this.clientRequest = new ClientRequest();
           this.productRequest = new ProductRequest();

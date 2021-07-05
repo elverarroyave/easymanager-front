@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClientRequestShopping } from 'src/app/model/ClientRequestShopping';
 import { ClientsService } from 'src/app/services/clients.service';
+import { SaleService } from 'src/app/services/sale.service';
 import { ShoppingInTable } from './modelShopping/ShoppingInTable';
 
 @Component({
@@ -17,15 +18,16 @@ export class ShopingClientComponent implements OnInit {
   notShopping: boolean = false;
 
   constructor(
-    private clientService: ClientsService,
+    private salesService: SaleService,
     private router: Router
     ) { }
 
   ngOnInit(): void {
     //Cargar datos del cliente
     const id: number = parseInt(this.clientIdRequest);
-    this.clientService.findById(id).subscribe(data=>{
-      this.shoppings = data.content[0].shopping;
+    this.salesService.findSalesOfClient(id).subscribe(data=>{
+      this.shoppings = data
+      //console.log(data)
       this.loadDataTable();
     },err=>{
       console.log(err)

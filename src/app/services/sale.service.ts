@@ -17,6 +17,14 @@ export class SaleService {
 
   public findByDateRange(finalDate: string, initDate: String){
     //console.log(this.URLsale + `?finalDate=${finalDate}` + `&initDate=${initDate}`)
-    return this.httpClient.get<any>(this.URLsale + `?finalDate=${finalDate}` + `&initDate=${initDate}`)
+    return this.httpClient.get<any>(this.URLsale + `?finalDate=${finalDate}` + `&initDate=${initDate}`);
+  }
+
+  public findById(id: number){
+    return this.httpClient.get<any>(this.URLsale + `/${id}`);
+  }
+
+  public findSalesOfClient(id: number){
+    return this.httpClient.get<any>(this.URLsale + '/findByClient' + `/${id}`);
   }
 }
