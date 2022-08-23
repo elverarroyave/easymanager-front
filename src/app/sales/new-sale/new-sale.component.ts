@@ -22,8 +22,8 @@ export class NewSaleComponent implements OnInit {
   formGroupProduct: FormGroup;
 
   //Modelos
-  clientRequest: ClientRequest = new ClientRequest();
-  productRequest: ProductRequest = new ProductRequest();
+  clientRequest: ClientRequest;
+  productRequest: ProductRequest;
 
   //Fecha
   currentDate: string;
@@ -161,11 +161,7 @@ export class NewSaleComponent implements OnInit {
       .createSale(this.clientRequest.numDocument, this.productsResponse)
       .subscribe(
         (data) => {
-          this.productsInTable.length = 0;
-          this.clientRequest = new ClientRequest();
-          this.productRequest = new ProductRequest();
-          this.totalSalePrice=0;
-          this.formGroupClient.reset();
+          this.resetForm();
         },
         (err) => {
           console.log(err);
@@ -206,5 +202,40 @@ export class NewSaleComponent implements OnInit {
   updateTotal() {
     this.totalSalePrice = 0;
     this.productsInTable.forEach((p) => (this.totalSalePrice += p.totalPrice));
+  }
+
+
+  private resetForm(){
+    this.productsInTable.length = 0;
+    this.totalSalePrice=0;
+    this.formGroupClient.reset();
+    this.formGroupProduct.reset();
+
+    this.clientRequest = {
+      id: 0,
+      name: null,
+      lastName: null,
+      email: null,
+      address: null,
+      numPhone: null,
+      numDocument: null,
+      createDate: null,
+      updateDate: null
+    }
+
+    this.productRequest = {
+      id: null,
+      baseQuantity: null,
+      brand: null,
+      category: null,
+      code: null,
+      createDate: null,
+      description: null,
+      name: null,
+      privatePrice: null,
+      publicPrice: null,
+      stock: null,
+      updateDate: null,
+    };
   }
 }

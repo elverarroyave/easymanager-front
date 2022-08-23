@@ -41,17 +41,17 @@ export class AddProductComponent implements OnInit {
 
   addProduct(){
     if(this.formProduct.valid){
-      let product: Product = new Product(
-        parseInt(this.formProduct.value.baseQuantity),
-        this.formProduct.value.brand,
-        this.formProduct.value.category,
-        this.formProduct.value.code,
-        this.formProduct.value.description,
-        this.formProduct.value.name,
-        parseFloat(this.formProduct.value.privatePrice),
-        parseFloat(this.formProduct.value.publicPrice),
-        parseInt(this.formProduct.value.stock)
-      )
+      let product: Product = {
+        baseQuantity:parseInt(this.formProduct.value.baseQuantity),
+        brand:this.formProduct.value.brand,
+        category:this.formProduct.value.category,
+        code:this.formProduct.value.code,
+        description:this.formProduct.value.description,
+        name:this.formProduct.value.name,
+        privatePrice:parseFloat(this.formProduct.value.privatePrice),
+        publicPrice:parseFloat(this.formProduct.value.publicPrice),
+        stock:parseInt(this.formProduct.value.stock)
+      }
 
       console.log(product)
 

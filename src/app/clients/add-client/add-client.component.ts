@@ -33,14 +33,14 @@ export class AddClientComponent implements OnInit {
   }
 
   saveClient(){
-    this.client = new Client(
-      this.formClient.value.name,
-      this.formClient.value.lastName,
-      this.formClient.value.email,
-      this.formClient.value.address,
-      this.formClient.value.phone,
-      this.formClient.value.document
-    )
+    this.client = {
+      name: this.formClient.value.name,
+      lastName: this.formClient.value.lastName,
+      email: this.formClient.value.email,
+      address: this.formClient.value.address,
+      numPhone: this.formClient.value.phone,
+      numDocument: this.formClient.value.document
+    }
 
     this.clientsService.saveClient(this.client).subscribe(data =>{
       this.alertService.successAlet('¡Cliente Agregado!', `${this.client.name}, agregado correctamente.`)

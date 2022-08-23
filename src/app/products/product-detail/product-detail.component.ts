@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class ProductDetailComponent implements OnInit {
 
-  product: ProductRequest = new ProductRequest();
+  product: ProductRequest;
   formProductDetail: FormGroup;
 
   editable: boolean = false;
@@ -96,17 +96,17 @@ export class ProductDetailComponent implements OnInit {
 
   updateProduct(){
     const id: number = parseInt(this.activatedRoute.snapshot.params.id);
-    let productToEdit = new Product(
-      parseInt(this.formProductDetail.value.baseQuantity),
-      this.formProductDetail.value.brand,
-      this.formProductDetail.value.category,
-      this.formProductDetail.value.code,
-      this.formProductDetail.value.description,
-      this.formProductDetail.value.name,
-      parseFloat(this.formProductDetail.value.privatePrice),
-      parseFloat(this.formProductDetail.value.publicPrice),
-      parseInt(this.formProductDetail.value.stock)
-    );
+    let productToEdit = {
+      baseQuantity:parseInt(this.formProductDetail.value.baseQuantity),
+      brand:this.formProductDetail.value.brand,
+      category:this.formProductDetail.value.category,
+      code:this.formProductDetail.value.code,
+      description:this.formProductDetail.value.description,
+      name:this.formProductDetail.value.name,
+      privatePrice:parseFloat(this.formProductDetail.value.privatePrice),
+      publicPrice:parseFloat(this.formProductDetail.value.publicPrice),
+      stock:parseInt(this.formProductDetail.value.stock)
+    };
     this.productService.updateProduct(id, productToEdit).subscribe(data=>{
       this.alert.successAlet(`¡Producto Editado!`,`${productToEdit.name} editado Correctamente.`)
     },err =>{

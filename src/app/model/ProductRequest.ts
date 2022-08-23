@@ -1,5 +1,5 @@
-export class ProductRequest{
-  
+export interface ProductRequest{
+
   id: number;
   baseQuantity: number;
   brand: string;
@@ -13,20 +13,6 @@ export class ProductRequest{
   stock: number;
   updateDate: Date;
 
-  constructor(
-  ){
-    this.id=0;
-    this.baseQuantity=0;
-    this.brand='';
-    this.category='';
-    this.code='';
-    this.createDate= new Date;
-    this.description='';
-    this.name='';
-    this.privatePrice=0;
-    this.publicPrice=0;
-    this.stock=0;
-    this.updateDate= new Date;
- 
-  }
+
+
 }

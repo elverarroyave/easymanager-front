@@ -16,9 +16,9 @@ import { Tools } from 'src/app/tools/Tools';
 export class ClientDetailComponent implements OnInit {
   //Variables
   formClientDetail: FormGroup;
-  clientRquest: ClientRequest = new ClientRequest();
+  clientRquest: ClientRequest;
   clientId: string;
-  
+
   tools: Tools = new Tools();
 
   isEdit: boolean = false;
@@ -78,14 +78,16 @@ export class ClientDetailComponent implements OnInit {
 
   editClient() {
     const id: number = this.clientRquest.id;
-    let clientToUpdate: Client = new Client(
-      this.formClientDetail.value.name,
-      this.formClientDetail.value.lastName,
-      this.formClientDetail.value.email,
-      this.formClientDetail.value.address,
-      this.formClientDetail.value.phone,
-      this.formClientDetail.value.document
-    );
+    let clientToUpdate: Client = {
+      name: this.formClientDetail.value.name,
+      lastName: this.formClientDetail.value.lastName,
+      email: this.formClientDetail.value.email,
+      address: this.formClientDetail.value.address,
+      numPhone: this.formClientDetail.value.phone,
+      numDocument: this.formClientDetail.value.document
+    }
+
+
     this.clientsService.updateClient(id, clientToUpdate).subscribe(
       (data) => {
         this.alertService.infoAlet(
