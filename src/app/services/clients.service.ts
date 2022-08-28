@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Client } from '../model/Client';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClientsService {
 
-  private URLClient="http://localhost:8080/api/v1/clients/"
+  private URLClient= environment.server_api_dev + "/clients/"
   constructor(private httpClient: HttpClient) { }
 
   public clientsByPages(page: number, order: string, size: number, asc: boolean){

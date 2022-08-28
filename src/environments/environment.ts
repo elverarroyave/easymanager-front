@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  server_api_dev: 'http://localhost:8080/easymanager/api/v1'
 };
 
 /*

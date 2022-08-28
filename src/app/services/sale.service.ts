@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { ProductoResponse } from '../sales/new-sale/modelSale/ProductResponse';
 
 @Injectable({
@@ -9,7 +10,7 @@ export class SaleService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private URLsale:string = "http://localhost:8080/api/v1/sales";
+  private URLsale:string = environment.server_api_dev + '/sales';
 
   public createSale(numDocument: string, productsResponse: Array<ProductoResponse>){
     return this.httpClient.post<any>(this.URLsale + '?numDocument=' + numDocument, productsResponse);

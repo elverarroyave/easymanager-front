@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Product } from '../model/Product';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { Product } from '../model/Product';
 })
 export class ProductsService {
 
-  private productsURL: string = 'http://localhost:8080/api/v1/products/'
+  private productsURL: string = environment.server_api_dev + '/products/'
   constructor(private httpClient: HttpClient) { }
 
   public productsByPages(page: number, order:string, size:number, asc: boolean){
