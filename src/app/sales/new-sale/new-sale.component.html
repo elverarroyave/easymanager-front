@@ -80,7 +80,7 @@
         />
       </form>
     </div>
-    <div class="col-md-6 mb-2 disabled">
+    <!-- <div class="col-md-6 mb-2 disabled">
       <form [formGroup]="formGroupProduct">
         <label class="text" for="">Nombre producto:</label>
         <input
@@ -92,7 +92,28 @@
         />
       </form>
     </div>
-  </div>
+  </div> -->
+  <div class="ng-autocomplete">
+    <ng-autocomplete
+      [data]="productsByName"
+      [searchKeyword]="productName"
+      placeholder="Select country"
+      (selected)='selectEvent($event)'
+      (inputChanged)='onChangeSearch($event)'
+      (inputFocused)='onFocused($event)'
+      [itemTemplate]="itemTemplate"
+      [notFoundTemplate]="notFoundTemplate">
+    </ng-autocomplete>
+
+    <ng-template #itemTemplate let-item>
+    <a [innerHTML]="item.name"></a>
+    </ng-template>
+
+    <ng-template #notFoundTemplate let-notFound>
+    <div [innerHTML]="notFound"></div>
+    </ng-template>
+    </div>
+
   <div class="container row">
     <div class="col-md-5">
       <label for="" class="text">Nombre del producto:</label>

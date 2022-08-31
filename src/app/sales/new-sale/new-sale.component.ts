@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ClientRequest } from 'src/app/model/ClientRequest';
+import { Product } from 'src/app/model/Product';
 import { ProductRequest } from 'src/app/model/ProductRequest';
 import { AlertService } from 'src/app/services/alert.service';
 import { ClientsService } from 'src/app/services/clients.service';
@@ -43,6 +44,11 @@ export class NewSaleComponent implements OnInit {
   //Herramienta
   tools: Tools = new Tools();
 
+  //Variables de consulta producto por nombre
+  productsByName: [];
+  productName: string;
+
+
   constructor(
     private clientsService: ClientsService,
     private productService: ProductsService,
@@ -59,6 +65,8 @@ export class NewSaleComponent implements OnInit {
     this.formProduct();
 
     this.isActiveBtnShopping = false;
+
+    this.productName = '';
   }
 
   // ngDoCheck() {
@@ -107,18 +115,6 @@ export class NewSaleComponent implements OnInit {
         this.alert.infoAlet('Opss', `${err.error}`);
       }
     );
-  }
-
-  findProductsByname(){
-    const name = 'co';
-    this.productService.findByName(name).subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
   }
 
   addProductInTable(product: ProductRequest) {
@@ -255,5 +251,32 @@ export class NewSaleComponent implements OnInit {
       stock: null,
       updateDate: null,
     };
+  }
+
+  //componente de busqueda de producto por conincidencia
+  selectEvent(item) {
+    // do something with selected item
+  }
+
+  onChangeSearch(val: string) {
+    // fetch remote data from here
+    // And reassign the 'data' which is binded to 'data' property.
+    console.log(val);
+  }
+
+  onFocused(e){
+    // do something when input is focused
+  }
+
+  findProductsByname(){
+    const name = 'co';
+    this.productService.findByName(name).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
   }
 }

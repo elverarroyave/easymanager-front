@@ -23,6 +23,7 @@ import { ClientDetailShoppingComponent } from './clients/client-detail-shopping/
 import { NewSaleComponent } from './sales/new-sale/new-sale.component';
 import { SalesConsultComponent } from './sales/sales-consult/sales-consult.component';
 import { SaleConsultDetailComponent } from './sales/sale-consult-detail/sale-consult-detail.component';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { SaleConsultDetailComponent } from './sales/sale-consult-detail/sale-con
     CollapseModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AutocompleteLibModule
   ],
   providers: [
     AlertService
