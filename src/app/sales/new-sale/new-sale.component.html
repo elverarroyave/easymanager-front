@@ -80,13 +80,27 @@
         />
       </form>
     </div>
+    <div class="col-md-6 mb-2 disabled">
+      <form [formGroup]="formGroupProduct">
+        <label class="text" for="">Nombre producto:</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="ingrese el código del producto..."
+          formControlName="code"
+          (keyup.enter)="loadProduct()"
+        />
+      </form>
+    </div>
+  </div>
+  <div class="container row">
     <div class="col-md-5">
       <label for="" class="text">Nombre del producto:</label>
       <input
         type="text"
         class="form-control"
         value="{{ productRequest.name }}"
-        disabled="true"
+        disabled
       />
     </div>
     <div class="col-md-2">
@@ -95,7 +109,7 @@
         type="number"
         class="form-control"
         value="{{ productRequest.stock }}"
-        disabled="true"
+        disabled
       />
     </div>
     <div class="col-md-2">
@@ -104,13 +118,20 @@
         type="number"
         class="form-control"
         value="{{ productRequest.publicPrice }}"
-        disabled="true"
+        disabled
       />
     </div>
     <div class="mt-1 mb-3">
       <button
         class="btn btn-outline-primary"
         (click)="loadProduct()"
+        [disabled]="formGroupProduct.invalid"
+      >
+        Buscar
+      </button>
+      <button
+        class="btn btn-outline-primary"
+        (click)="findProductsByname()"
         [disabled]="formGroupProduct.invalid"
       >
         Buscar
@@ -181,7 +202,7 @@
   </div>
   <div style="display: flex; justify-content: center">
     <button
-      [disabled]="!isActiveBtnShopping"
+      [disabled]="true"
       (click)="playShopping()"
       class="btn btn-success"
     >

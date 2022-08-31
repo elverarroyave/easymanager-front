@@ -36,4 +36,8 @@ export class ProductsService {
     return this.httpClient.get<any>(this.productsURL + 'code/' + code);
   }
 
+  public findByName(name:string): Observable<any>{
+    return this.httpClient.get<any>(this.productsURL + 'name/?name=' + name);
+  }
+
 }

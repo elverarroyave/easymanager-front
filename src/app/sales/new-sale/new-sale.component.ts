@@ -35,7 +35,7 @@ export class NewSaleComponent implements OnInit {
   productsResponse: Array<ProductoResponse> = new Array<ProductoResponse>();
 
   //Desactivar boton realizar compra
-  isActiveBtnShopping: boolean = false;
+  isActiveBtnShopping: boolean;
 
   //Total price shopping
   totalSalePrice: number = 0;
@@ -57,13 +57,16 @@ export class NewSaleComponent implements OnInit {
     //Cargamos los formularios
     this.formClient();
     this.formProduct();
+
+    this.isActiveBtnShopping = false;
   }
 
-  ngDoCheck() {
-    //ActiveBtnShopping
-    this.isActiveBtnShopping =
-      this.productsInTable.length != 0 && this.clientRequest.id != 0;
-  }
+  // ngDoCheck() {
+  //   //ActiveBtnShopping
+  //   this.isActiveBtnShopping =
+  //     this.productsInTable.length != 0 && this.clientRequest.id != 0;
+  //     console.log(this.isActiveBtnShopping);
+  // }
 
   //formulario de cliente
   private formClient() {
@@ -75,6 +78,7 @@ export class NewSaleComponent implements OnInit {
   private formProduct() {
     this.formGroupProduct = this.fb.group({
       code: ['', Validators.required],
+      name: ['']
     });
   }
 
@@ -105,6 +109,18 @@ export class NewSaleComponent implements OnInit {
     );
   }
 
+  findProductsByname(){
+    const name = 'co';
+    this.productService.findByName(name).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
+
   addProductInTable(product: ProductRequest) {
     //Coroborar si el producto esta añadido.
     let exist: boolean = false;
@@ -117,13 +133,15 @@ export class NewSaleComponent implements OnInit {
     });
 
     if (!exist) {
-      let productInTable = new ProductInTable(
-        product.code,
-        product.name,
-        1,
-        product.publicPrice,
-        product.publicPrice
-      );
+      let productInTable: ProductInTable ={
+        code: product.code,
+        name: product.name,
+        amount: 1,
+        unitPrice: product.publicPrice,
+        totalPrice: product.publicPrice
+      };
+
+
       this.productsInTable.push(productInTable);
     }
     this.updateTotal();
@@ -150,10 +168,10 @@ export class NewSaleComponent implements OnInit {
   private createShopping() {
     this.productsResponse.length = 0;
     this.productsInTable.forEach((productInTable) => {
-      let productResponse: ProductoResponse = new ProductoResponse(
-        productInTable.code,
-        productInTable.amount
-      );
+      let productResponse: ProductoResponse = {
+        code: productInTable.code,
+        quantity: productInTable.amount
+      };
       this.productsResponse.push(productResponse);
     });
 

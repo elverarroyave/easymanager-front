@@ -4,9 +4,9 @@
 
     <div class="col-md-3 mt-2 mb-4" *ngFor='let product of products'>
       <div class="card" style="width: auto; cursor: pointer;" routerLink="/products/product-detail/{{product.id}}">
-        <img 
-        src="../../../assets/product-icon.jpg"  
-        class="card-img-top" 
+        <img
+        src="../../../assets/product-icon.jpg"
+        class="card-img-top"
         alt="..." >
         <div class="card-body">
           <h5 class="card-title text">{{product.name}}</h5>
@@ -14,8 +14,9 @@
           <p class="card-text">Descripción: {{product.description}}</p>
           <h6 class="card-text">Marca: {{product.brand}}</h6>
           <h6>Cantidad disponible: {{product.stock}} und.</h6>
-          <br>
-          <h5 class="text">Precio: {{product.publicPrice | currency: '$'}}</h5>          
+        </div>
+        <div class="card-footer">
+          <h5 class="text">Precio: {{product.publicPrice | currency: '$'}}</h5>
         </div>
       </div>
     </div>
