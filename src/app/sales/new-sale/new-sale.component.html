@@ -80,29 +80,19 @@
         />
       </form>
     </div>
-    <!-- <div class="col-md-6 mb-2 disabled">
-      <form [formGroup]="formGroupProduct">
-        <label class="text" for="">Nombre producto:</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="ingrese el código del producto..."
-          formControlName="code"
-          (keyup.enter)="loadProduct()"
-        />
-      </form>
-    </div>
-  </div> -->
-  <div class="ng-autocomplete">
+
+  <div class="col-md-6 ng-autocomplete">
+    <label class="text" for="">Buscar por nombre del producto:</label>
     <ng-autocomplete
-      [data]="productsByName"
+      [data]="productsByName$ | async"
       [searchKeyword]="productName"
-      placeholder="Select country"
       (selected)='selectEvent($event)'
       (inputChanged)='onChangeSearch($event)'
       (inputFocused)='onFocused($event)'
       [itemTemplate]="itemTemplate"
-      [notFoundTemplate]="notFoundTemplate">
+      [notFoundTemplate]="notFoundTemplate"
+      placeholder="Ingrese el nombre del producto..."
+      >
     </ng-autocomplete>
 
     <ng-template #itemTemplate let-item>
@@ -146,13 +136,6 @@
       <button
         class="btn btn-outline-primary"
         (click)="loadProduct()"
-        [disabled]="formGroupProduct.invalid"
-      >
-        Buscar
-      </button>
-      <button
-        class="btn btn-outline-primary"
-        (click)="findProductsByname()"
         [disabled]="formGroupProduct.invalid"
       >
         Buscar
@@ -223,7 +206,7 @@
   </div>
   <div style="display: flex; justify-content: center">
     <button
-      [disabled]="true"
+      [disabled]="!isActiveBtnShopping"
       (click)="playShopping()"
       class="btn btn-success"
     >

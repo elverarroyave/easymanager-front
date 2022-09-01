@@ -6,8 +6,8 @@ export interface ClientRequest{
   address: string;
   numPhone: string;
   numDocument: string;
-  createDate: string;
-  updateDate: string;
+  createDate?: string;
+  updateDate?: string;
   link ?: Array<any>;
 
 }

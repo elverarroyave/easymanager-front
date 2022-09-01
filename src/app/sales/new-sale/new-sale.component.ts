@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { ClientRequest } from 'src/app/model/ClientRequest';
-import { Product } from 'src/app/model/Product';
 import { ProductRequest } from 'src/app/model/ProductRequest';
 import { AlertService } from 'src/app/services/alert.service';
 import { ClientsService } from 'src/app/services/clients.service';
@@ -16,6 +16,7 @@ import { ProductoResponse } from './modelSale/ProductResponse';
   selector: 'app-new-sale',
   templateUrl: './new-sale.component.html',
   styleUrls: ['./new-sale.component.scss'],
+  providers:[ProductsService]
 })
 export class NewSaleComponent implements OnInit {
   //Formularios
@@ -45,8 +46,8 @@ export class NewSaleComponent implements OnInit {
   tools: Tools = new Tools();
 
   //Variables de consulta producto por nombre
-  productsByName: [];
-  productName: string;
+  productsByName$: Observable<any[]>;
+  productName: string = 'name';
 
 
   constructor(
@@ -64,17 +65,39 @@ export class NewSaleComponent implements OnInit {
     this.formClient();
     this.formProduct();
 
+    this.clientRequest = {
+      id: 0,
+      name: '',
+      lastName: '',
+      email: '',
+      address: '',
+      numPhone: '',
+      numDocument: '',
+    }
+
+    this.productRequest = {
+      id: 0,
+      baseQuantity: 0,
+      brand: '',
+      category: '',
+      code: '',
+      description: '',
+      name: '',
+      privatePrice: 0,
+      publicPrice: 0,
+      stock: 0
+    }
+
     this.isActiveBtnShopping = false;
 
-    this.productName = '';
   }
 
-  // ngDoCheck() {
-  //   //ActiveBtnShopping
-  //   this.isActiveBtnShopping =
-  //     this.productsInTable.length != 0 && this.clientRequest.id != 0;
-  //     console.log(this.isActiveBtnShopping);
-  // }
+  ngDoCheck() {
+    //ActiveBtnShopping
+    this.isActiveBtnShopping =
+      this.productsInTable.length != 0 && this.clientRequest.id != 0;
+      console.log(this.isActiveBtnShopping);
+  }
 
   //formulario de cliente
   private formClient() {
@@ -256,27 +279,22 @@ export class NewSaleComponent implements OnInit {
   //componente de busqueda de producto por conincidencia
   selectEvent(item) {
     // do something with selected item
+    this.productRequest = item;
+    this.addProductInTable(this.productRequest);
+    this.productsByName$ = null;
   }
 
-  onChangeSearch(val: string) {
+
+  onChangeSearch(name: string) {
     // fetch remote data from here
     // And reassign the 'data' which is binded to 'data' property.
-    console.log(val);
+    this.productsByName$ = this.productService.findByName(name);
+    console.log(this.productsByName$);
   }
 
   onFocused(e){
     // do something when input is focused
   }
 
-  findProductsByname(){
-    const name = 'co';
-    this.productService.findByName(name).subscribe(
-      (data) => {
-        console.log(data);
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
-  }
+
 }

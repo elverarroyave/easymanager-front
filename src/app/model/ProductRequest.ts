@@ -5,13 +5,13 @@ export interface ProductRequest{
   brand: string;
   category: string;
   code: string;
-  createDate: Date;
+  createDate?: Date;
   description: string;
   name: string;
   privatePrice: number;
   publicPrice: number;
   stock: number;
-  updateDate: Date;
+  updateDate?: Date;
 
 
 

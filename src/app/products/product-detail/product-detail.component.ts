@@ -109,6 +109,7 @@ export class ProductDetailComponent implements OnInit {
     };
     this.productService.updateProduct(id, productToEdit).subscribe(data=>{
       this.alert.successAlet(`¡Producto Editado!`,`${productToEdit.name} editado Correctamente.`)
+      this.noEditable();
     },err =>{
       if(err.error.errors != undefined){
         this.alert.infoAlet(`Error al agregar el producto!`,`${err.error.errors[0].defaultMessage}`)
