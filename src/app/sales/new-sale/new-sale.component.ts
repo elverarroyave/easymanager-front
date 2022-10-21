@@ -169,7 +169,7 @@ export class NewSaleComponent implements OnInit {
 
   playShopping() {
     Swal.fire({
-      title: '¿Realizar compra?',
+      title: '¿Realizar venta?',
       confirmButtonText: `Vender`,
       showDenyButton: true,
       denyButtonText: `Cancelar`,
