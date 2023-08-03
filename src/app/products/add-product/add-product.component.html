@@ -5,25 +5,25 @@
 
     <div class="row mb-4">
       <div class="col-sm-6">
-        <label for="" class="text mb-1">Nombre:</label>
+        <label for="" class="text mb-1 required required">Nombre</label>
         <input type="text" formControlName="name" class="form-control" placeholder="Ej: Marcador">
       </div>
-  
+
       <div class="col-sm-3">
-        <label for="" class="text mb-1">Codigo:</label>
+        <label for="" class="text mb-1 required">Codigo</label>
         <input type="text" formControlName="code" class="form-control" placeholder="AC6512656">
       </div>
-  
+
       <div class="col-sm-3">
-        <label for="" class="text mb-1">Marca:</label>
+        <label for="" class="text mb-1">Marca</label>
         <input type="text" formControlName="brand" class="form-control" placeholder="Ej: Eternar">
       </div>
     </div>
 
     <div class="row mb-4">
-   
+
       <div class="col-sm-3">
-        <label for="" class="text mb-1">Categoria:</label>
+        <label for="" class="text mb-1">Categoria</label>
         <select class="form-select" formControlName="category" aria-label="Default select example">
           <option selected>Seleccione uno...</option>
           <option value="Papelería">Papeleria</option>
@@ -33,7 +33,7 @@
       </div>
 
       <div class="col-sm-9">
-        <label for="" class="text mb-1">Descripción:</label>
+        <label for="" class="text mb-1">Descripción</label>
         <textarea class="form-control" formControlName="description" placeholder="Ej: Marcador Permanente Eterna, color negro" id="floatingTextarea" style="height: 30px;"></textarea>
       </div>
 
@@ -42,25 +42,25 @@
 
     <div class="row mb-4">
       <div class="col-sm-3">
-        <label for="" class="text mb-1">Precio al costo:</label>
+        <label for="" class="text mb-1 required">Precio al costo</label>
         <input type="number" formControlName="privatePrice" class="form-control" placeholder="Ej: 900">
       </div>
-  
+
       <div class="col-sm-3">
-        <label for="" class="text mb-1">Precio al publico</label>
+        <label for="" class="text mb-1 required">Precio al publico</label>
         <input type="number" formControlName="publicPrice" class="form-control" placeholder="Ej: 1500">
       </div>
 
       <div class="col-sm-3">
-        <label for="" class="text mb-1">Cantidad base</label>
+        <label for="" class="text mb-1 required">Cantidad base</label>
         <input type="number" formControlName="baseQuantity" class="form-control" placeholder="Ej: 24">
       </div>
 
       <div class="col-sm-3">
-        <label for="" class="text mb-1">Cantidad adquirdia</label>
+        <label for="" class="text mb-1 required">Cantidad adquirdia</label>
         <input type="number" formControlName="stock" class="form-control" placeholder="Ej: 24">
       </div>
-    </div> 
+    </div>
 
     <div class="row mb-4">
       <div class="col-sm-12">
@@ -77,4 +77,4 @@
     <button class="btn btn-success" style="margin-right: 4px;" [disabled]="formProduct.invalid" (click)="addProduct()">Agregar nuevo producto</button>
     <button class="btn btn-primary" style="margin-left: 4px;" routerLink="/products/list-products">Volver a la lista de productos</button>
   </div>
-</div> 
+</div>
