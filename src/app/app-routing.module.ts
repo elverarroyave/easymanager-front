@@ -11,6 +11,7 @@ import { ProductDetailComponent } from './products/product-detail/product-detail
 import { NewSaleComponent } from './sales/new-sale/new-sale.component';
 import { SaleConsultDetailComponent } from './sales/sale-consult-detail/sale-consult-detail.component';
 import { SalesConsultComponent } from './sales/sales-consult/sales-consult.component';
+import { AddDistributorComponent } from './distributors/add-distributor/add-distributor.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,8 +24,8 @@ const routes: Routes = [
   { path: 'clients/client-detail/:id/sale/:idSale', component: ClientDetailShoppingComponent},
   { path: 'sales/new', component: NewSaleComponent},
   { path: 'sales/salesConsult', component: SalesConsultComponent},
-  { path: 'sales/saleConsultDetail/:id', component: SaleConsultDetailComponent}
-
+  { path: 'sales/saleConsultDetail/:id', component: SaleConsultDetailComponent},
+  { path: 'distributors/add', component: AddDistributorComponent}
 ];
 
 @NgModule({
