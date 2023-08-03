@@ -24,6 +24,7 @@ import { NewSaleComponent } from './sales/new-sale/new-sale.component';
 import { SalesConsultComponent } from './sales/sales-consult/sales-consult.component';
 import { SaleConsultDetailComponent } from './sales/sale-consult-detail/sale-consult-detail.component';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
+import { AddDistributorComponent } from './distributors/add-distributor/add-distributor.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
     ClientDetailShoppingComponent,
     NewSaleComponent,
     SalesConsultComponent,
-    SaleConsultDetailComponent
+    SaleConsultDetailComponent,
+    AddDistributorComponent
   ],
   imports: [
     BrowserModule,
