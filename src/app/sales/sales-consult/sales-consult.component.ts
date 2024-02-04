@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SaleService } from 'src/app/services/sale.service';
 import { SaleInTable } from './model-sales-consult/SaleInTable';
@@ -13,7 +13,7 @@ import { SaleInTable } from './model-sales-consult/SaleInTable';
 export class SalesConsultComponent implements OnInit {
 
   //Formulario
-  formDateGroup: FormGroup;
+  formDateGroup: UntypedFormGroup;
 
   //Sales
   salesRequest: Array<any> = new Array<any>();
@@ -22,7 +22,7 @@ export class SalesConsultComponent implements OnInit {
 
   totalSalesPrice: number=0;
 
-  constructor(private fb: FormBuilder, private saleService: SaleService, private router: Router) { }
+  constructor(private fb: UntypedFormBuilder, private saleService: SaleService, private router: Router) { }
 
   otherRange: boolean = false;
 

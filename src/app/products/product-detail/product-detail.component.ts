@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/model/Product';
 import { ProductRequest } from 'src/app/model/ProductRequest';
@@ -15,12 +15,12 @@ import Swal from 'sweetalert2';
 export class ProductDetailComponent implements OnInit {
 
   product: ProductRequest;
-  formProductDetail: FormGroup;
+  formProductDetail: UntypedFormGroup;
 
   editable: boolean = false;
 
   constructor(
-    private fb:FormBuilder,
+    private fb:UntypedFormBuilder,
     private productService: ProductsService,
     private activatedRoute: ActivatedRoute,
     private route: Router,

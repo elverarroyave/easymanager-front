@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Distributor } from 'src/app/model/Distributor';
 import { AlertService } from 'src/app/services/alert.service';
 import { DistributorService } from 'src/app/services/distributor.service';
@@ -11,12 +11,12 @@ import { DistributorService } from 'src/app/services/distributor.service';
 })
 export class AddDistributorComponent implements OnInit {
 
-  formDistributor: FormGroup
+  formDistributor: UntypedFormGroup
 
   distributor: Distributor
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private distributorService: DistributorService,
     private alertService: AlertService
   ) { }

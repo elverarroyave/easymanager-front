@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Client } from 'src/app/model/Client';
 import { AlertService } from 'src/app/services/alert.service';
 import { ClientsService } from 'src/app/services/clients.service';
@@ -11,12 +11,12 @@ import { ClientsService } from 'src/app/services/clients.service';
 })
 export class AddClientComponent implements OnInit {
 
-  formClient: FormGroup;
+  formClient: UntypedFormGroup;
 
   client: Client;
 
   constructor(
-      private fb: FormBuilder,
+      private fb: UntypedFormBuilder,
       private clientsService: ClientsService,
       private alertService: AlertService
     ) { }

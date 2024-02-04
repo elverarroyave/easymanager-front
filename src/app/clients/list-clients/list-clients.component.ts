@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClientsService } from 'src/app/services/clients.service';
 
@@ -22,9 +22,9 @@ export class ListClientsComponent implements OnInit {
 
   clients: Array<any> = [];
 
-  formSize: FormGroup;
+  formSize: UntypedFormGroup;
 
-  constructor(private clientsService: ClientsService, private router: Router, private fb: FormBuilder) { }
+  constructor(private clientsService: ClientsService, private router: Router, private fb: UntypedFormBuilder) { }
 
   ngOnInit(): void {
     this.loadClients();

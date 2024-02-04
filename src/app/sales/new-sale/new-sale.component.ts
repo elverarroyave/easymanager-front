@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ClientRequest } from 'src/app/model/ClientRequest';
 import { ProductRequest } from 'src/app/model/ProductRequest';
@@ -20,8 +20,8 @@ import { ProductoResponse } from './modelSale/ProductResponse';
 })
 export class NewSaleComponent implements OnInit {
   //Formularios
-  formGroupClient: FormGroup;
-  formGroupProduct: FormGroup;
+  formGroupClient: UntypedFormGroup;
+  formGroupProduct: UntypedFormGroup;
 
   //Modelos
   clientRequest: ClientRequest;
@@ -54,7 +54,7 @@ export class NewSaleComponent implements OnInit {
     private clientsService: ClientsService,
     private productService: ProductsService,
     private saleService: SaleService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private alert: AlertService
   ) {}
 

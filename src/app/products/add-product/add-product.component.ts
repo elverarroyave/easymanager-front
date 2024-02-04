@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/model/Product';
 import { AlertService } from 'src/app/services/alert.service';
@@ -13,11 +13,11 @@ import { ProductsService } from 'src/app/services/products.service';
 export class AddProductComponent implements OnInit {
 
   //Variables
-  formProduct: FormGroup;
+  formProduct: UntypedFormGroup;
   
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private productService: ProductsService,
     private ruta: Router,
     private alert: AlertService

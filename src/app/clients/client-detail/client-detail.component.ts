@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Client } from 'src/app/model/Client';
 import { ClientRequest } from 'src/app/model/ClientRequest';
@@ -15,7 +15,7 @@ import { Tools } from 'src/app/tools/Tools';
 })
 export class ClientDetailComponent implements OnInit {
   //Variables
-  formClientDetail: FormGroup;
+  formClientDetail: UntypedFormGroup;
   clientRquest: ClientRequest;
   clientId: string;
 
@@ -27,7 +27,7 @@ export class ClientDetailComponent implements OnInit {
     private clientsService: ClientsService,
     private activateddRoute: ActivatedRoute,
     private alertService: AlertService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private ruote: Router
   ) {}
 
