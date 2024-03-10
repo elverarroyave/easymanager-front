@@ -7,5 +7,5 @@ export interface Product{
   name: string;
   privatePrice: number;
   publicPrice: number;
-  stock: number;
+  stock?: number;
 }

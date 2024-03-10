@@ -2,8 +2,47 @@
   <h1 class="text text-center mb-4">Agregar un nuevo producto</h1>
 
   <form [formGroup]="formProduct" action="">
+    <mat-card-content>
+      <div class="form-row">
+        <div class="form-file">
+          <mat-form-field class="myField" appearance="fill">
+            <mat-label class="required"> Nombre </mat-label>
+            <input
+              matInput
+              placeholder="Ej: Marcador"
+              value=""
+              formContro="name"
+            />
+          </mat-form-field>
+        </div>
 
-    <div class="row mb-4">
+        <div class="form-file">
+          <mat-form-field class="myField" appearance="fill">
+            <mat-label class="required"> Código </mat-label>
+            <input
+              matInput
+              placeholder="Ej: ABC123"
+              value=""
+              formContro="code"
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="form-file">
+          <mat-form-field class="myField" appearance="fill">
+            <mat-label class="required"> Marca </mat-label>
+            <input
+              matInput
+              placeholder="Ej: Samsung"
+              value=""
+              formContro="brand"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+
+    <!-- <div class="row mb-4">
       <div class="col-sm-6">
         <label for="" class="text mb-1 required required">Nombre</label>
         <input type="text" formControlName="name" class="form-control" placeholder="Ej: Marcador">
@@ -18,7 +57,7 @@
         <label for="" class="text mb-1">Marca</label>
         <input type="text" formControlName="brand" class="form-control" placeholder="Ej: Eternar">
       </div>
-    </div>
+    </div> -->
 
     <div class="row mb-4">
 
@@ -73,8 +112,21 @@
     </div>
   </form>
 
-  <div class="mt-4" style="display: flex; justify-content: center;">
-    <button class="btn btn-success" style="margin-right: 4px;" [disabled]="formProduct.invalid" (click)="addProduct()">Agregar nuevo producto</button>
-    <button class="btn btn-primary" style="margin-left: 4px;" routerLink="/products/list-products">Volver a la lista de productos</button>
+  <div class="mt-4" style="display: flex; justify-content: center">
+    <button
+      class="btn btn-success"
+      style="margin-right: 4px"
+      [disabled]="formProduct.invalid"
+      (click)="addProduct()"
+    >
+      Agregar nuevo producto
+    </button>
+    <button
+      class="btn btn-primary"
+      style="margin-left: 4px"
+      routerLink="/products/list-products"
+    >
+      Volver a la lista de productos
+    </button>
   </div>
 </div>

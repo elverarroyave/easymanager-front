@@ -14,7 +14,7 @@ export class AddProductComponent implements OnInit {
 
   //Variables
   formProduct: UntypedFormGroup;
-  
+
 
   constructor(
     private fb: UntypedFormBuilder,
@@ -50,7 +50,7 @@ export class AddProductComponent implements OnInit {
         name:this.formProduct.value.name,
         privatePrice:parseFloat(this.formProduct.value.privatePrice),
         publicPrice:parseFloat(this.formProduct.value.publicPrice),
-        stock:parseInt(this.formProduct.value.stock)
+        // stock:parseInt(this.formProduct.value.stock)
       }
 
       console.log(product)
@@ -67,11 +67,11 @@ export class AddProductComponent implements OnInit {
         }else(
           this.alert.infoAlet(`Error al agregar el producto!`,`${err.error}`)
         )
-        
+
       })
-      
+
     }
-   
+
   }
 
 }
