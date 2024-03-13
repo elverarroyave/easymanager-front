@@ -25,6 +25,7 @@ import { SalesConsultComponent } from './sales/sales-consult/sales-consult.compo
 import { SaleConsultDetailComponent } from './sales/sale-consult-detail/sale-consult-detail.component';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { AddDistributorComponent } from './distributors/add-distributor/add-distributor.component';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { AddDistributorComponent } from './distributors/add-distributor/add-dist
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AutocompleteLibModule
+    AutocompleteLibModule,
+    MaterialModule
   ],
   providers: [
     AlertService
