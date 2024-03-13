@@ -1,10 +1,11 @@
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1976d2;">
+<nav class="navbar navbar-expand-lg navbar-dark main-color">
   <div class="container-fluid">
-    <a class="navbar-brand">Easy Manager</a>
-    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+    <!-- <a class="navbar-brand" routerLink="/" style="cursor: pointer;">AlóTúTienda</a> -->
+    <img src="../../assets/Logo_png_300px.png" alt="" routerLink="/" style="cursor: pointer; width: 150px;">
+    <button class="navbar-toggler" type="button" (click)="collapsedMenu()" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" [collapse]="!isCollapsed" [isAnimated]="true">
+    <div class="collapse navbar-collapse" [collapse]="!isCollapsed">
       <ul class="navbar-nav me-auto my-2 my-lg-0 " style="height: auto">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/" (click)="isCollapsed = false">Inicio</a>

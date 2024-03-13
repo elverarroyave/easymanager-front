@@ -3,6 +3,7 @@ import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms
 import { Router } from '@angular/router';
 import { SaleService } from 'src/app/services/sale.service';
 import { SaleInTable } from './model-sales-consult/SaleInTable';
+import { AlertService } from 'src/app/services/alert.service';
 
 
 @Component({
@@ -22,7 +23,11 @@ export class SalesConsultComponent implements OnInit {
 
   totalSalesPrice: number=0;
 
-  constructor(private fb: UntypedFormBuilder, private saleService: SaleService, private router: Router) { }
+  constructor(
+    private fb: UntypedFormBuilder,
+    private saleService: SaleService,
+    private router: Router,
+    private alertService: AlertService) { }
 
   otherRange: boolean = false;
 
@@ -51,7 +56,7 @@ export class SalesConsultComponent implements OnInit {
       finalDate.getFullYear(),
       finalDate.getMonth(),
       finalDate.getDate()-numDais
-    ); 
+    );
     this.loadData(initDate.toISOString().substring(0,10),finalDate.toISOString().substring(0,10));
   }
 
@@ -59,10 +64,9 @@ export class SalesConsultComponent implements OnInit {
     this.salesRequest.length = 0;
     this.saleService.findByDateRange(initDate,finalDate).subscribe(data=>{
       this.salesRequest = data
-      //console.log(this.salesRequest)
       this. loadSalesInTable();
     },err=>{
-      console.log(err)
+      this.alertService.infoAlet('Upss! ',err.error);
     })
   }
 

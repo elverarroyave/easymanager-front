@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   server_api_dev: 'http://localhost:8080/easymanager/api/v1'
+  // server_api_dev: 'http://192.168.1.4:8080/easymanager/api/v1'
 };
 
 /*

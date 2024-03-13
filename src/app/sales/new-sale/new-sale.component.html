@@ -1,5 +1,5 @@
-<div class="container mt-2 mb-2">
-  <div class="container">
+<div class="container mt-4 mb-4">
+  <div>
     <h5 class="text" style="text-align: right">
       Fecha: {{ currentDate | date: "mediumDate" }}
     </h5>
@@ -7,7 +7,7 @@
 
   <div>
     <h1 class="text text-center">Nueva venta</h1>
-    <div class="container row">
+    <div class="row mt-2 mb-2">
       <h5 class="text">Datos de Cliente</h5>
       <div class="col-md-4">
         <form action="" [formGroup]="formGroupClient">
@@ -31,7 +31,7 @@
         </button>
       </div>
     </div>
-    <div class="row container mt-2">
+    <div class="row mt-2 mb-2">
       <div class="col-md-5">
         <label class="text" for="">Nombre:</label>
         <input
@@ -62,11 +62,11 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="row mt-2 mb-2">
     <hr class="solid" />
   </div>
 
-  <div class="container row">
+  <div class="row mt-2 mb-2">
     <h5 class="text">Producto</h5>
     <div class="col-md-3">
       <form [formGroup]="formGroupProduct">
@@ -104,8 +104,8 @@
     </ng-template>
     </div>
 
-  <div class="container row">
-    <div class="col-md-5">
+  <div class="row mt-2 mb 2">
+    <div class="col-sm-5">
       <label for="" class="text">Nombre del producto:</label>
       <input
         type="text"
@@ -114,7 +114,7 @@
         disabled
       />
     </div>
-    <div class="col-md-2">
+    <div class="col-sm-2">
       <label for="" class="text">Stock:</label>
       <input
         type="number"
@@ -123,7 +123,7 @@
         disabled
       />
     </div>
-    <div class="col-md-2">
+    <div class="col-sm-2">
       <label for="" class="text">Precio:</label>
       <input
         type="number"
@@ -143,7 +143,7 @@
     </div>
   </div>
 
-  <div class="container">
+  <div class="row mt-2 mb-2">
     <hr class="solid" />
   </div>
 
@@ -152,7 +152,7 @@
     <table class="table table-hover">
       <thead class="table-dark">
         <tr>
-          <th>#</th>
+          <td>#</td>
           <td>Código</td>
           <td>Nombre</td>
           <td>Cantidad</td>
@@ -163,7 +163,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let productInTable of productsInTable; index as i">
-          <th>{{ i + 1 }}</th>
+          <td>{{ i + 1 }}</td>
           <td>{{ productInTable.code }}</td>
           <td>{{ productInTable.name }}</td>
           <td>
@@ -178,7 +178,7 @@
             />
           </td>
           <td>{{ productInTable.unitPrice | currency: "$" }}</td>
-          <th>{{ productInTable.totalPrice | currency: "$" }}</th>
+          <td>{{ productInTable.totalPrice | currency: "$" }}</td>
           <td style="padding: 4px 0">
             <button
               class="btn btn-outline-danger"
@@ -196,19 +196,19 @@
           <td></td>
           <td></td>
           <td></td>
-          <th><h5 class="text" style="text-align: right;">Total:</h5></th>
-          <th>
+          <td><h5 class="text" style="text-align: right;">Total:</h5></td>
+          <td>
             <h5 class="text">{{ totalSalePrice | currency: "$" }}</h5>
-          </th>
+          </td>
         </tr>
       </tfoot>
     </table>
   </div>
-  <div style="display: flex; justify-content: center">
+  <div class="mt-3 mb-3" style="display: flex; justify-content: center">
     <button
       [disabled]="!isActiveBtnShopping"
       (click)="playShopping()"
-      class="btn btn-success"
+      class="btn main-color"
     >
       Realizar venta
     </button>
