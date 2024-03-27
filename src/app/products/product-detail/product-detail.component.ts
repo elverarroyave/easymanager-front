@@ -27,123 +27,120 @@ export class ProductDetailComponent implements OnInit {
     private alert: AlertService
   ) { }
 
+
   ngOnInit(): void {
-    const id = parseInt(this.activatedRoute.snapshot.params.id);
-    this.productService.findById(id).subscribe(data=>{
-      this.product = data.content[0] as ProductRequest;
-      this.uploadDates();
-    }, err =>{
-      console.log(err)
-    })  
+    // const id = parseInt(this.activatedRoute.snapshot.params.id);
+    // this.productService.findById(id).subscribe(data=>{
+    //   this.product = data.content[0] as ProductRequest;
+    //   this.uploadDates();
+    // }, err =>{
+    //   console.log(err)
+    // })
 
 
-    //Crear Formulario
-    this.formProductDetail = this.fb.group({
-      name:['', Validators.required],
-      code:['', Validators.required],
-      brand:[''],
-      category:[''],
-      description:[''],
-      publicPrice:['', Validators.required],
-      privatePrice:['', Validators.required],
-      baseQuantity:['', Validators.required],
-      stock:['', Validators.required],
-      createdDate:[''],
-      updatedDate:['']
-    })
+    // //Crear Formulario
+    // this.formProductDetail = this.fb.group({
+    //   name:['', Validators.required],
+    //   code:['', Validators.required],
+    //   model:[''],
+    //   brand:['', Validators.required],
+    //   category:['', Validators.required],
+    //   description:[''],
+    //   amountMountWarranty:[0, Validators.min(0)],
+    //   weight:[0],
+    //   heigh:[0, Validators.min(0)],
+    //   width:[0, Validators.min(0)],
+    //   depth:[0, Validators.min(0)],
+    //   voltage:[0],
+    //   color:[''],
+    //   createdDate:[''],
+    //   updatedDate:['']
+    // })
 
-    this.formProductDetail.disable();
+    // this.formProductDetail.disable();
   }
 
-  private uploadDates(){
-    //Rellenar formulario
-    this.formProductDetail.setValue({
-      name: this.product.name,
-      code: this.product.code,
-      brand: this.product.brand,
-      category: this.product.category,
-      description: this.product.description,
-      publicPrice: this.product.publicPrice,
-      privatePrice: this.product.privatePrice,
-      baseQuantity: this.product.baseQuantity,
-      stock: this.product.stock,
-      createdDate: this.dateFormat(this.product.createDate.toString()),
-      updatedDate: this.dateFormat(this.product.updateDate.toString())
-    })
-  }
+  // private uploadDates(){
+  //   //Rellenar formulario
+  //   this.formProductDetail.setValue({
+  //     name: this.product.name,
+  //     code: this.product.code,
+  //     brand: this.product.brand,
+  //     category: this.product.category,
+  //     description: this.product.description,
+  //     publicPrice: this.product.publicPrice,
+  //     privatePrice: this.product.privatePrice,
+  //     baseQuantity: this.product.baseQuantity,
+  //     stock: this.product.stock,
+  //     createdDate: this.dateFormat(this.product.createDate.toString()),
+  //     updatedDate: this.dateFormat(this.product.updateDate.toString())
+  //   })
+  // }
 
-  private dateFormat(date: string): string{
-    let dateFormat = new Date(
-      parseInt(date.substring(0,4)),
-      parseInt(date.substring(5,7)),
-      parseInt(date.substring(8,10)),
-      parseInt(date.substring(11,13)),
-      parseInt(date.substring(14,16)),
-      parseInt(date.substring(17,19))
-    )
-    return dateFormat.toString();
-  }
+  // private dateFormat(date: string): string{
+  //   let dateFormat = new Date(
+  //     parseInt(date.substring(0,4)),
+  //     parseInt(date.substring(5,7)),
+  //     parseInt(date.substring(8,10)),
+  //     parseInt(date.substring(11,13)),
+  //     parseInt(date.substring(14,16)),
+  //     parseInt(date.substring(17,19))
+  //   )
+  //   return dateFormat.toString();
+  // }
 
-  isEditable(){
-    this.editable=true;
-    this.formProductDetail.enable();
-  }
+  // isEditable(){
+  //   this.editable=true;
+  //   this.formProductDetail.enable();
+  // }
 
-  noEditable(){
-    this.editable=false;
-    this.formProductDetail.disable();
-  }
+  // noEditable(){
+  //   this.editable=false;
+  //   this.formProductDetail.disable();
+  // }
 
-  updateProduct(){
-    const id: number = parseInt(this.activatedRoute.snapshot.params.id);
-    let productToEdit = {
-      baseQuantity:parseInt(this.formProductDetail.value.baseQuantity),
-      brand:this.formProductDetail.value.brand,
-      category:this.formProductDetail.value.category,
-      code:this.formProductDetail.value.code,
-      description:this.formProductDetail.value.description,
-      name:this.formProductDetail.value.name,
-      privatePrice:parseFloat(this.formProductDetail.value.privatePrice),
-      publicPrice:parseFloat(this.formProductDetail.value.publicPrice),
-      stock:parseInt(this.formProductDetail.value.stock)
-    };
-    this.productService.updateProduct(id, productToEdit).subscribe(data=>{
-      this.alert.successAlet(`¡Producto Editado!`,`${productToEdit.name} editado Correctamente.`)
-      this.noEditable();
-    },err =>{
-      if(err.error.errors != undefined){
-        this.alert.infoAlet(`Error al agregar el producto!`,`${err.error.errors[0].defaultMessage}`)
-      }else(
-        this.alert.infoAlet(`Error al agregar el producto!`,`${err.error}`)
-      )
-    })
-  }
+  // updateProduct(){
+  //   const id: number = parseInt(this.activatedRoute.snapshot.params.id);
+  //   let productToEdit = {
 
-  deleteProduct(){
-    const id: number = parseInt(this.activatedRoute.snapshot.params.id);
+  //   };
+  //   this.productService.updateProduct(id, productToEdit).subscribe(data=>{
+  //     this.alert.successAlet(`¡Producto Editado!`,`${productToEdit.name} editado Correctamente.`)
+  //     this.noEditable();
+  //   },err =>{
+  //     if(err.error.errors != undefined){
+  //       this.alert.infoAlet(`Error al agregar el producto!`,`${err.error.errors[0].defaultMessage}`)
+  //     }else(
+  //       this.alert.infoAlet(`Error al agregar el producto!`,`${err.error}`)
+  //     )
+  //   })
+  // }
 
-    Swal.fire({
-      title: `¿Eliminar ${this.product.name}?`,
-      showDenyButton: false,
-      showCancelButton: true,
-      confirmButtonText: `Eliminar`,
-      cancelButtonText: 'Cancelar',
-      confirmButtonColor: '#dc3545'
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        Swal.fire('Eliminado!', '', 'success')
-  
-        this.productService.deleteProdcut(id).subscribe(data=>{
-          this.alert.infoAlet('¡Producto Eliminar!', `${this.product.name}, eliminado correctamente.`)
-        },err=>{
-          this.alert.errorAlert('Error :/',`Hay un error para eliminar el producto, ${this.product.name}.`)
-        })
-        
-      } else if (result.isDenied) {
-        Swal.fire('Cambios no guardados', '', 'info')
-      }
-    })
-  }
+  // deleteProduct(){
+  //   const id: number = parseInt(this.activatedRoute.snapshot.params.id);
+
+  //   Swal.fire({
+  //     title: `¿Eliminar ${this.product.name}?`,
+  //     showDenyButton: false,
+  //     showCancelButton: true,
+  //     confirmButtonText: `Eliminar`,
+  //     cancelButtonText: 'Cancelar',
+  //     confirmButtonColor: '#dc3545'
+  //   }).then((result) => {
+  //     /* Read more about isConfirmed, isDenied below */
+  //     if (result.isConfirmed) {
+  //       Swal.fire('Eliminado!', '', 'success')
+
+  //       this.productService.deleteProdcut(id).subscribe(data=>{
+  //         this.alert.infoAlet('¡Producto Eliminar!', `${this.product.name}, eliminado correctamente.`)
+  //       },err=>{
+  //         this.alert.errorAlert('Error :/',`Hay un error para eliminar el producto, ${this.product.name}.`)
+  //       })
+
+  //     } else if (result.isDenied) {
+  //       Swal.fire('Cambios no guardados', '', 'info')
+  //     }
+  //   })
+  // }
 
 }

@@ -17,6 +17,7 @@ export class AddProductComponent implements OnInit {
   formProduct: UntypedFormGroup;
   categories: Array<any> = [];
 
+  priceValue: number;
 
   constructor(
     private fb: UntypedFormBuilder,
@@ -28,6 +29,8 @@ export class AddProductComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.priceValue = 0;
+
     //Get Categories
     this.getCategories();
 
@@ -37,6 +40,7 @@ export class AddProductComponent implements OnInit {
       model:[''],
       brand:['', Validators.required],
       category:['', Validators.required],
+      price:[100, [Validators.required, Validators.min(100)]],
       description:[''],
       amountMountWarranty:[0, Validators.min(0)],
       weight:[0],
@@ -68,6 +72,7 @@ export class AddProductComponent implements OnInit {
       description:this.formProduct.value.description,
       name:this.formProduct.value.name,
       amountMountWarranty:this.formProduct.value.amountMountWarranty,
+      price:this.formProduct.value.price,
       heigh:this.formProduct.value.heigh,
       width:this.formProduct.value.width,
       depth:this.formProduct.value.depth,

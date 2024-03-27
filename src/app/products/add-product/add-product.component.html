@@ -89,12 +89,15 @@
         </div>
         <div class="row">
           <mat-form-field class="myField" appearance="fill">
-            <mat-label>Voltage</mat-label>
-            <mat-select formControlName="voltage">
-              <mat-option value="110">110</mat-option>
-              <mat-option value="220">220</mat-option>
-              <mat-option value="110/220">110/220</mat-option>
-            </mat-select>
+            <mat-label>Precio: </mat-label>
+            <input
+              matInput
+              currencyMask
+              placeholder="$0.00"
+              [(ngModel)]="priceValue"
+              style="font-size: medium; color: red;"
+              formControlName="price"
+              >
           </mat-form-field>
         </div>
       </div>
@@ -155,7 +158,7 @@
             matInput
             type="number"
             placeholder="cm"
-            min="0"
+            min="100"
             formControlName="depth"
           />
           <mat-error *ngIf="formProduct.get('depth').hasError('min')">
@@ -176,6 +179,16 @@
             formControlName="color"
             maxlength="20"
           />
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3">
+        <mat-form-field class="myField" appearance="fill">
+          <mat-label>Voltage</mat-label>
+          <mat-select formControlName="voltage">
+            <mat-option value="110">110</mat-option>
+            <mat-option value="220">220</mat-option>
+            <mat-option value="110/220">110/220</mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
     </div>

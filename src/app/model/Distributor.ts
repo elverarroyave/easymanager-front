@@ -1,5 +1,3 @@
-import { StringLiteral } from "typescript";
-
 export interface Distributor{
   name: string;
   nit: string;

@@ -7,10 +7,13 @@ export interface Product{
   description: string;
   category: string;
   amountMountWarranty: number;
+  price: number;
   weight: number;
   heigh: number;
   width: number;
   depth: number;
   voltage: number;
   color: string;
+  createdDate?: Date;
+  updatedDate?: Date;
 }

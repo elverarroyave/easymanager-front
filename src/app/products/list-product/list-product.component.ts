@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from 'src/app/services/products.service';
+import { Inventory } from 'src/app/model/Inventory';
+import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
   selector: 'app-list-product',
@@ -8,7 +9,7 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ListProductComponent implements OnInit {
 
-  constructor(private productsService: ProductsService) { }
+  constructor(private inventoryService: InventoryService) { }
 
   page: number=0;
   size: number=12;
@@ -21,21 +22,30 @@ export class ListProductComponent implements OnInit {
   isFirst: boolean= false;
   isLast: boolean= false;
 
-  products: Array<any> = [];
+  inventory: Array<Inventory> = [];
 
   ngOnInit(): void {
     this.loadProducts();
+    this.loadInventory();
   }
 
   loadProducts(){
-    this.productsService.productsByPages(this.page, this.order, this.size, this.asc).subscribe(data=>{
-      this.products = this.products.concat(data.content);
+    this.inventoryService.getInventoryByPages(this.page, 'id', this.size, this.asc).subscribe(data=>{
+      this.inventory = this.inventory.concat(data.content);
       this.isFirst = data.first;
       this.isLast = data.last;
       this.totalPages = new Array(data.totalPages);
     },
     err=>{
       console.log(err.error);
+    })
+  }
+
+  loadInventory(){
+    this.inventoryService.getInventoryByPages(this.page, 'id', this.size, this.asc).subscribe(data=>{
+      console.log(data)
+    }, err=>{
+      console.log(err.error)
     })
   }
 

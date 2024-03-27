@@ -2,21 +2,21 @@
   <h1 class="text">Lista de todos los productos</h1>
   <div class="row mt-3" style="display: flex; justify-content: center;">
 
-    <div class="col-md-3 mt-2 mb-4" *ngFor='let product of products'>
-      <div class="card" style="width: auto; cursor: pointer;" routerLink="/products/product-detail/{{product.id}}">
+    <div class="col-md-3 mt-2 mb-4" *ngFor='let item of inventory'>
+      <div class="card" style="width: auto; cursor: pointer;" routerLink="/products/product-detail/{{item.product.id}}">
         <img
         src="../../../assets/product-icon.jpg"
         class="card-img-top"
         alt="..." >
         <div class="card-body">
-          <h5 class="card-title text">{{product.name}}</h5>
-          <h6 class="subtitle">Código: {{product.code}}</h6>
-          <p class="card-text">Descripción: {{product.description}}</p>
-          <h6 class="card-text">Marca: {{product.brand}}</h6>
-          <h6>Cantidad disponible: {{product.stock}} und.</h6>
+          <h5 class="card-title text">{{item.product.name}}</h5>
+          <h6 class="subtitle">Código: {{item.product.code}}</h6>
+          <p class="card-text">Descripción: {{item.product.description | truncate:100}}</p>
+          <h6 class="card-text">Marca: {{item.product.brand}}</h6>
+          <h6>Cantidad disponible: {{item.stock}} und.</h6>
         </div>
         <div class="card-footer">
-          <h5 class="text">Precio: {{product.publicPrice | currency: '$'}}</h5>
+          <h5 class="text">Precio: {{item.product.price | currency: '$'}}</h5>
         </div>
       </div>
     </div>

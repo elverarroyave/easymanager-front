@@ -26,6 +26,9 @@ import { SaleConsultDetailComponent } from './sales/sale-consult-detail/sale-con
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { AddDistributorComponent } from './distributors/add-distributor/add-distributor.component';
 import { MaterialModule } from './material/material.module';
+import { TruncatePipe } from './pipes/truncate.pipe';
+import { MatInputModule } from '@angular/material/input';
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 @NgModule({
   declarations: [
@@ -43,7 +46,8 @@ import { MaterialModule } from './material/material.module';
     NewSaleComponent,
     SalesConsultComponent,
     SaleConsultDetailComponent,
-    AddDistributorComponent
+    AddDistributorComponent,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,
@@ -56,7 +60,9 @@ import { MaterialModule } from './material/material.module';
     ReactiveFormsModule,
     HttpClientModule,
     AutocompleteLibModule,
-    MaterialModule
+    MaterialModule,
+    MatInputModule,
+    CurrencyMaskModule
   ],
   providers: [
     AlertService
