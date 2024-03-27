@@ -14,3 +14,14 @@
   margin: 10px;
   width: 100%;
 }
+
+mat-form-field{
+  width: 100%;
+}
+
+::ng-deep .mat-form-field-wrapper,
+::ng-deep .mat-form-field-flex,
+::ng-deep .mat-form-field-infix {
+  height: 100%;
+}
+

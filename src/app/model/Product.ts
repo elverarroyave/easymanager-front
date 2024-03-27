@@ -1,11 +1,16 @@
 export interface Product{
-  baseQuantity: number;
-  brand: string;
-  category: string;
-  code: string;
-  description: string;
+  id?: number,
   name: string;
-  privatePrice: number;
-  publicPrice: number;
-  stock?: number;
+  code: string;
+  model: string;
+  brand: string;
+  description: string;
+  category: string;
+  amountMountWarranty: number;
+  weight: number;
+  heigh: number;
+  width: number;
+  depth: number;
+  voltage: number;
+  color: string;
 }

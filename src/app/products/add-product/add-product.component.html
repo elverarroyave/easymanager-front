@@ -2,113 +2,182 @@
   <h1 class="text text-center mb-4">Agregar un nuevo producto</h1>
 
   <form [formGroup]="formProduct" action="">
-    <mat-card-content>
-      <div class="form-row">
-        <div class="form-file">
-          <mat-form-field class="myField" appearance="fill">
-            <mat-label class="required"> Nombre </mat-label>
-            <input
-              matInput
-              placeholder="Ej: Marcador"
-              value=""
-              formContro="name"
-            />
-          </mat-form-field>
-        </div>
-
-        <div class="form-file">
-          <mat-form-field class="myField" appearance="fill">
-            <mat-label class="required"> Código </mat-label>
-            <input
-              matInput
-              placeholder="Ej: ABC123"
-              value=""
-              formContro="code"
-            />
-          </mat-form-field>
-        </div>
-
-        <div class="form-file">
-          <mat-form-field class="myField" appearance="fill">
-            <mat-label class="required"> Marca </mat-label>
-            <input
-              matInput
-              placeholder="Ej: Samsung"
-              value=""
-              formContro="brand"
-            />
-          </mat-form-field>
-        </div>
-      </div>
-    </mat-card-content>
-
-    <!-- <div class="row mb-4">
-      <div class="col-sm-6">
-        <label for="" class="text mb-1 required required">Nombre</label>
-        <input type="text" formControlName="name" class="form-control" placeholder="Ej: Marcador">
+    <div class="row mt-4 mb-2">
+      <h3 class="text text-left">Características generales</h3>
+      <div class="col-md-5">
+        <mat-form-field class="myField" appearance="fill">
+          <mat-label class="required"> Nombre </mat-label>
+          <input
+            matInput
+            placeholder="Ej: Marcador"
+            formControlName="name"
+            required
+            maxlength="100"
+          />
+          <mat-error>Este campo es obligatorio</mat-error>
+        </mat-form-field>
       </div>
 
-      <div class="col-sm-3">
-        <label for="" class="text mb-1 required">Codigo</label>
-        <input type="text" formControlName="code" class="form-control" placeholder="AC6512656">
+      <div class="col-md-2">
+        <mat-form-field class="myField" appearance="fill">
+          <mat-label class="required"> Código </mat-label>
+          <input
+            matInput
+            placeholder="Ej: ABC123"
+            formControlName="code"
+            required
+            maxlength="50"
+          />
+          <mat-error>Este campo es obligatorio</mat-error>
+        </mat-form-field>
       </div>
 
-      <div class="col-sm-3">
-        <label for="" class="text mb-1">Marca</label>
-        <input type="text" formControlName="brand" class="form-control" placeholder="Ej: Eternar">
-      </div>
-    </div> -->
-
-    <div class="row mb-4">
-
-      <div class="col-sm-3">
-        <label for="" class="text mb-1">Categoria</label>
-        <select class="form-select" formControlName="category" aria-label="Default select example">
-          <option selected>Seleccione uno...</option>
-          <option value="Papelería">Papeleria</option>
-          <option disabled value="Cosmeticos">Cosmeticos</option>
-          <option disabled value="Farmacos">Farmacos</option>
-        </select>
+      <div class="col-md-2">
+        <mat-form-field class="myField" appearance="fill">
+          <mat-label class="required"> Marca </mat-label>
+          <input
+            matInput
+            placeholder="Ej: Sharpie"
+            formControlName="brand"
+            maxlength="50"
+          />
+          <mat-error>Este campo es obligatorio</mat-error>
+        </mat-form-field>
       </div>
 
-      <div class="col-sm-9">
-        <label for="" class="text mb-1">Descripción</label>
-        <textarea class="form-control" formControlName="description" placeholder="Ej: Marcador Permanente Eterna, color negro" id="floatingTextarea" style="height: 30px;"></textarea>
-      </div>
-
-  </div>
-
-
-    <div class="row mb-4">
-      <div class="col-sm-3">
-        <label for="" class="text mb-1 required">Precio al costo</label>
-        <input type="number" formControlName="privatePrice" class="form-control" placeholder="Ej: 900">
-      </div>
-
-      <div class="col-sm-3">
-        <label for="" class="text mb-1 required">Precio al publico</label>
-        <input type="number" formControlName="publicPrice" class="form-control" placeholder="Ej: 1500">
-      </div>
-
-      <div class="col-sm-3">
-        <label for="" class="text mb-1 required">Cantidad base</label>
-        <input type="number" formControlName="baseQuantity" class="form-control" placeholder="Ej: 24">
-      </div>
-
-      <div class="col-sm-3">
-        <label for="" class="text mb-1 required">Cantidad adquirdia</label>
-        <input type="number" formControlName="stock" class="form-control" placeholder="Ej: 24">
+      <div class="col-md-3">
+        <mat-form-field class="myField" appearance="fill">
+          <mat-label class="required">Categoría</mat-label>
+          <mat-select formControlName="category">
+            <mat-option
+              *ngFor="let category of categories"
+              [value]="category.id"
+            >
+              {{ category.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error>Este campo es obligatorio</mat-error>
+        </mat-form-field>
       </div>
     </div>
 
-    <div class="row mb-4">
-      <div class="col-sm-12">
-        <label class="text mb-1" for="">Sube una foto:</label>
-        <input type="file" class="form-control" placeholder="Agrega tu foto. .jpg .png .svg">
+    <div class="row mb-2">
+      <div class="col-md-9">
+        <mat-form-field appearance="fill" style="width: 100%; height: 100%;">
+          <mat-label>Descripción</mat-label>
+          <textarea
+            style="width: 100%; height: 100%;"
+            matInput
+            placeholder="Ej: Marcador de punta fina..."
+            formControlName="description"
+            maxlength="1250"
+          ></textarea>
+        </mat-form-field>
       </div>
-      <!-- <div class="col-sm-12 mt-2">
-        <progressbar value="" type="warning">%</progressbar>
-      </div> -->
+
+      <div class="col-md-3">
+        <div class="row">
+          <mat-form-field class="myField" appearance="fill">
+            <mat-label>Modelo</mat-label>
+            <input
+              matInput
+              placeholder="Ej: M1234"
+              formControlName="model"
+              maxlength="50"
+            />
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field class="myField" appearance="fill">
+            <mat-label>Voltage</mat-label>
+            <mat-select formControlName="voltage">
+              <mat-option value="110">110</mat-option>
+              <mat-option value="220">220</mat-option>
+              <mat-option value="110/220">110/220</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <h3 class="text text-left">Peso y dimensiones</h3>
+      <div class="col-sm-3">
+        <mat-form-field class="myField" appearance="fill">
+          <mat-label>Peso</mat-label>
+          <input
+            matInput
+            type="number"
+            placeholder="kg"
+            min="0"
+            formControlName="weight"
+          />
+          <mat-error *ngIf="formProduct.get('weight').hasError('min')">
+            El peso debe ser mayor a 0.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-3">
+        <mat-form-field class="myField" appearance="fill">
+          <mat-label>Alto</mat-label>
+          <input
+            matInput
+            type="number"
+            placeholder="cm"
+            min="0"
+            formControlName="heigh"
+          />
+          <mat-error *ngIf="formProduct.get('heigh').hasError('min')">
+            La altura debe ser mayor a 0.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3">
+        <mat-form-field class="myField" appearance="fill">
+          <mat-label>Ancho</mat-label>
+          <input
+            matInput
+            type="number"
+            placeholder="cm"
+            min="0"
+            formControlName="width"
+          />
+          <mat-error *ngIf="formProduct.get('width').hasError('min')">
+            El ancho debe ser mayor a 0.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-3">
+        <mat-form-field class="myField" appearance="fill">
+          <mat-label>Profundidad</mat-label>
+          <input
+            matInput
+            type="number"
+            placeholder="cm"
+            min="0"
+            formControlName="depth"
+          />
+          <mat-error *ngIf="formProduct.get('depth').hasError('min')">
+            La profundidad debe ser mayor a 0.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row mb-2">
+      <h3>Otras características</h3>
+      <div class="col-sm-3">
+        <mat-form-field class="myField" appearance="fill">
+          <mat-label>Color</mat-label>
+          <input
+            matInput
+            placeholder="Ej: Azul"
+            formControlName="color"
+            maxlength="20"
+          />
+        </mat-form-field>
+      </div>
     </div>
   </form>
 

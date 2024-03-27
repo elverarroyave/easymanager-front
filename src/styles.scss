@@ -19,13 +19,13 @@ body {
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-.required:after {
-  content: ' *';
-  color: red;
-}
+// .required:after {
+//   content: ' *';
+//   color: red;
+// }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 .main-color {
   background-color: #615da9;
