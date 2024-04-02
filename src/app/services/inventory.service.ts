@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class InventoryService {
 
@@ -12,5 +12,9 @@ export class InventoryService {
 
   public getInventoryByPages(page: number, order: string, size: number, asc: boolean){
     return this.httpClient.get<any>(this.inventoryURL + 'inventoryByPages?' + `page=${page}&size=${size}&order=${order}&asc=${asc}`);
+  }
+
+  public getInventoryById(id: number){
+    return this.httpClient.get<any>(this.inventoryURL + id);
   }
 }

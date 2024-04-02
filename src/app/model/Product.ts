@@ -5,11 +5,11 @@ export interface Product{
   model: string;
   brand: string;
   description: string;
-  category: string;
+  category: number;
   amountMountWarranty: number;
   price: number;
   weight: number;
-  heigh: number;
+  height: number;
   width: number;
   depth: number;
   voltage: number;

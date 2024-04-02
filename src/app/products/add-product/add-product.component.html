@@ -129,9 +129,9 @@
             type="number"
             placeholder="cm"
             min="0"
-            formControlName="heigh"
+            formControlName="height"
           />
-          <mat-error *ngIf="formProduct.get('heigh').hasError('min')">
+          <mat-error *ngIf="formProduct.get('height').hasError('min')">
             La altura debe ser mayor a 0.
           </mat-error>
         </mat-form-field>
@@ -158,7 +158,7 @@
             matInput
             type="number"
             placeholder="cm"
-            min="100"
+            min="0"
             formControlName="depth"
           />
           <mat-error *ngIf="formProduct.get('depth').hasError('min')">

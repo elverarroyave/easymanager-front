@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Inventory } from 'src/app/model/Inventory';
 import { InventoryService } from 'src/app/services/inventory.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-list-product',
   templateUrl: './list-product.component.html',
@@ -9,7 +9,8 @@ import { InventoryService } from 'src/app/services/inventory.service';
 })
 export class ListProductComponent implements OnInit {
 
-  constructor(private inventoryService: InventoryService) { }
+  constructor(private inventoryService: InventoryService,
+    private router: Router) { }
 
   page: number=0;
   size: number=12;

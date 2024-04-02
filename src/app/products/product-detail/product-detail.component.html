@@ -1,3 +1,282 @@
 <div class="container mt-5 mb-5 mb-5">
+  <h2 class="text text-center">{{ product.name }}</h2>
+  <div class="row mt-4">
+    <div class="col-sm-6 container">
+      <h2 class="text">Detelles de producto</h2>
+      <form action="" [formGroup]="formProductDetail">
+        <div class="row mt-4">
+          <div class="col-sm-12">
+            <mat-form-field class="myField" appearance="fill">
+              <mat-label class="required"> Nombre </mat-label>
+              <input
+                matInput
+                placeholder="Ej: Marcador"
+                formControlName="name"
+                required
+                maxlength="100"
+              />
+              <mat-error>Este campo es obligatorio</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
 
+        <div class="row mt-2">
+          <div class="col-md-4">
+            <mat-form-field class="myField" appearance="fill">
+              <mat-label class="required"> Código </mat-label>
+              <input
+                matInput
+                placeholder="Ej: ABC123"
+                formControlName="code"
+                required
+                maxlength="50"
+              />
+              <mat-error>Este campo es obligatorio</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <mat-form-field class="myField" appearance="fill">
+              <mat-label class="required"> Marca </mat-label>
+              <input
+                matInput
+                placeholder="Ej: Sharpie"
+                formControlName="brand"
+                maxlength="50"
+              />
+              <mat-error>Este campo es obligatorio</mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-4">
+            <mat-form-field class="myField" appearance="fill">
+              <mat-label class="required">Categoría</mat-label>
+              <mat-select formControlName="category">
+                <mat-option
+                  *ngFor="let category of categories"
+                  [value]="category.id"
+                >
+                  {{ category.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error>Este campo es obligatorio</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-md-6">
+            <mat-form-field class="myField" appearance="fill">
+              <mat-label>Modelo</mat-label>
+              <input
+                matInput
+                placeholder="Ej: M1234"
+                formControlName="model"
+                maxlength="50"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="myField" appearance="fill">
+              <mat-label>Precio: </mat-label>
+              <input
+                matInput
+                currencyMask
+                placeholder="$0.00"
+                [(ngModel)]="priceValue"
+                style="font-size: medium; color: red"
+                formControlName="price"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <h3 class="text text-left">Peso y dimensiones</h3>
+        <div class="row mt-2">
+          <div class="col-md-4">
+            <mat-form-field class="myField" appearance="fill">
+              <mat-label>Alto</mat-label>
+              <input
+                matInput
+                type="number"
+                placeholder="cm"
+                min="0"
+                formControlName="height"
+              />
+              <mat-error
+                *ngIf="formProductDetail.get('height').hasError('min')"
+              >
+                La altura debe ser mayor a 0.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="myField" appearance="fill">
+              <mat-label>Ancho</mat-label>
+              <input
+                matInput
+                type="number"
+                placeholder="cm"
+                min="0"
+                formControlName="width"
+              />
+              <mat-error *ngIf="formProductDetail.get('width').hasError('min')">
+                El ancho debe ser mayor a 0.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="myField" appearance="fill">
+              <mat-label>Profundidad</mat-label>
+              <input
+                matInput
+                type="number"
+                placeholder="cm"
+                min="0"
+                formControlName="depth"
+              />
+              <mat-error *ngIf="formProductDetail.get('depth').hasError('min')">
+                La profundidad debe ser mayor a 0.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-md-4">
+            <mat-form-field class="myField" appearance="fill">
+              <mat-label>Peso</mat-label>
+              <input
+                matInput
+                type="number"
+                placeholder="kg"
+                min="0"
+                formControlName="weight"
+              />
+              <mat-error
+                *ngIf="formProductDetail.get('weight').hasError('min')"
+              >
+                El peso debe ser mayor a 0.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <h3>Otras características</h3>
+        <div class="row mt-2">
+          <div class="col-md-4">
+            <mat-form-field class="myField" appearance="fill">
+              <mat-label>Color</mat-label>
+              <input
+                matInput
+                placeholder="Ej: Azul"
+                formControlName="color"
+                maxlength="20"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="myField" appearance="fill">
+              <mat-label>Voltage</mat-label>
+              <mat-select formControlName="voltage">
+                <mat-option value="110">110</mat-option>
+                <mat-option value="220">220</mat-option>
+                <mat-option value="110/220">110/220</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-sm-6">
+            <mat-form-field class="myField" appearance="fill">
+              <mat-label> Fecha de creación </mat-label>
+              <input
+                matInput
+                type="text"
+                readonly
+                value="{{ inventory.product.createdDate | date : 'short' }}"
+              />
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field class="myField" appearance="fill">
+              <mat-label> Fecha de actualización </mat-label>
+              <input
+                matInput
+                type="text"
+                readonly
+                value="{{ inventory.product.updatedDate | date : 'short' }}"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-sm-12">
+            <mat-form-field appearance="fill" style="width: 100%; height: 100%;">
+              <mat-label>Descripción</mat-label>
+              <textarea
+                matInput
+                formControlName="description"
+                name=""
+                id=""
+                rows="5"
+                maxlength="1250"
+              ></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+      <div style="display: flex; justify-content: left; margin-top: 20px">
+        <button
+          *ngIf="!editable"
+          class="btn btn-outline-warning"
+          style="margin-right: 4px"
+          (click)="isEditable()"
+        >
+          Editar Producto
+        </button>
+        <button
+          *ngIf="!editable"
+          (click)="deleteProduct()"
+          class="btn btn-outline-danger"
+          style="margin-left: 4px"
+        >
+          Eliminar Producto
+        </button>
+        <button
+          *ngIf="editable"
+          (click)="updateProduct()"
+          [disabled]="formProductDetail.invalid"
+          class="btn btn-outline-success"
+          style="margin-left: 4px"
+        >
+          Guardar cambios
+        </button>
+        <button
+          *ngIf="editable"
+          (click)="noEditable()"
+          class="btn btn-outline-secondary"
+          style="margin-left: 4px"
+        >
+          Cancelar
+        </button>
+      </div>
+    </div>
+    <div class="col-sm-6 container mt-4">
+      <h2 class="text text-center">Imagen del producto</h2>
+      <div class="container" style="display: flex; justify-content: end">
+        <img src="../../../assets/product-icon.jpg" alt="" class="img" />
+      </div>
+      <div class="div" style="display: flex; justify-content: center;">
+        <h2 type="text"><strong>Stock disponible: {{inventory.stock }} unidades.</strong></h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-4" style="display: flex; justify-content: center">
+    <button class="btn main-color" routerLink="/products/list-products">
+      Volver a lista de productos
+    </button>
+  </div>
 </div>

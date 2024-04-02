@@ -6,7 +6,7 @@ export interface Inventory{
   stock: number;
   baseStock: number;
   price: number;
-  createdDate: Date;
-  updatedDate: Date;
+  createDate: Date;
+  updateDate: Date;
 
 }
