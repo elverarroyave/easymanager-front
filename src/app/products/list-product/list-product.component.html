@@ -10,13 +10,13 @@
         alt="..." >
         <div class="card-body">
           <h5 class="card-title text">{{item.product.name}}</h5>
-          <h6 class="subtitle">Código: {{item.product.code}}</h6>
-          <p class="card-text">Descripción: {{item.product.description | truncate:100}}</p>
+          <h5 class="subtitle">Código: {{item.product.code}}</h5>
+          <h5 class="card-text">Descripción: {{item.product.description | truncate:50}}</h5>
           <h6 class="card-text">Marca: {{item.product.brand}}</h6>
           <h6>Cantidad disponible: {{item.stock}} und.</h6>
         </div>
         <div class="card-footer">
-          <h5 class="text">Precio: {{item.product.price | currency: '$'}}</h5>
+          <h4 class="text" style="margin: auto;">Precio: {{item.product.price | currency: '$'}}</h4>
         </div>
       </div>
     </div>
