@@ -27,7 +27,7 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { AddDistributorComponent } from './distributors/add-distributor/add-distributor.component';
 import { MaterialModule } from './material/material.module';
 import { TruncatePipe } from './pipes/truncate.pipe';
-import { MatInputModule } from '@angular/material/input';
+import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 
 @NgModule({
