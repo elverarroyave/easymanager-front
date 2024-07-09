@@ -10,6 +10,7 @@ import { Product } from '../model/Product';
 export class ProductsService {
 
   private productsURL: string = environment.server_api_dev + '/products/'
+  private inventoryURL: string = environment.server_api_dev + '/inventory/';
   constructor(private httpClient: HttpClient) { }
 
   public productsByPages(page: number, order:string, size:number, asc: boolean){
@@ -33,7 +34,7 @@ export class ProductsService {
   }
 
   public findByCode(code:string): Observable<any>{
-    return this.httpClient.get<any>(this.productsURL + 'code/' + code);
+    return this.httpClient.get<any>(this.inventoryURL + 'findByProductCode/' + code);
   }
 
   public findByName(name:string): Observable<any[]>{

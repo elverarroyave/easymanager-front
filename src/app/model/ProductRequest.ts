@@ -8,7 +8,6 @@ export interface ProductRequest{
   createDate?: Date;
   description: string;
   name: string;
-  privatePrice: number;
   publicPrice: number;
   stock: number;
   updateDate?: Date;

@@ -1,27 +1,28 @@
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { ClientRequest } from 'src/app/model/ClientRequest';
-import { ProductRequest } from 'src/app/model/ProductRequest';
-import { AlertService } from 'src/app/services/alert.service';
-import { ClientsService } from 'src/app/services/clients.service';
-import { ProductsService } from 'src/app/services/products.service';
-import { SaleService } from 'src/app/services/sale.service';
-import { Tools } from 'src/app/tools/Tools';
+import {Component, OnInit} from '@angular/core';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {ClientRequest} from 'src/app/model/ClientRequest';
+import {ProductRequest} from 'src/app/model/ProductRequest';
+import {AlertService} from 'src/app/services/alert.service';
+import {ClientsService} from 'src/app/services/clients.service';
+import {ProductsService} from 'src/app/services/products.service';
+import {SaleService} from 'src/app/services/sale.service';
+import {Tools} from 'src/app/tools/Tools';
 import Swal from 'sweetalert2';
-import { ProductInTable } from './modelSale/ProductInTable';
-import { ProductoResponse } from './modelSale/ProductResponse';
+import {ProductInTable} from './modelSale/ProductInTable';
+import {ProductoResponse} from './modelSale/ProductResponse';
+import {SaleSaveRequest} from "./modelSale/saleSaveRequest";
 
 @Component({
   selector: 'app-new-sale',
   templateUrl: './new-sale.component.html',
   styleUrls: ['./new-sale.component.scss'],
-  providers:[ProductsService]
+  providers: [ProductsService]
 })
 export class NewSaleComponent implements OnInit {
   //Formularios
   formGroupClient: UntypedFormGroup;
   formGroupProduct: UntypedFormGroup;
+  formGroupSale: UntypedFormGroup;
 
   //Modelos
   clientRequest: ClientRequest;
@@ -46,7 +47,7 @@ export class NewSaleComponent implements OnInit {
   tools: Tools = new Tools();
 
   //Variables de consulta producto por nombre
-  productsByName$: Observable<any[]>;
+  productsByName: any[];
   productName: string = 'name';
 
 
@@ -83,7 +84,6 @@ export class NewSaleComponent implements OnInit {
       code: '',
       description: '',
       name: '',
-      privatePrice: 0,
       publicPrice: 0,
       stock: 0
     }
@@ -113,6 +113,14 @@ export class NewSaleComponent implements OnInit {
     });
   }
 
+  private formSale(): void{
+    this.formGroupSale = this.fb.group({
+      isCredit: [false, Validators.required],
+      paymentMethod: ['', Validators.required],
+      paymentAmount: [1, Validators.required],
+    })
+  }
+
   loadClient() {
     const numDocument = this.formGroupClient.value.document;
     this.clientsService.findByDocument(numDocument).subscribe(
@@ -126,11 +134,11 @@ export class NewSaleComponent implements OnInit {
     );
   }
 
-  loadProduct() {
-    const code = this.formGroupProduct.value.code;
+  loadProduct(productCode?: string) {
+    const code = this.formGroupProduct.value.code || productCode;
     this.productService.findByCode(code).subscribe(
       (data) => {
-        this.productRequest = data.content[0];
+        this.setProductRequest(data);
         this.formGroupProduct.reset();
         this.addProductInTable(this.productRequest);
       },
@@ -138,6 +146,18 @@ export class NewSaleComponent implements OnInit {
         this.alert.infoAlet('Opss', `${err.error}`);
       }
     );
+  }
+
+  private setProductRequest(data: any) {
+    this.productRequest.id = data.product.id;
+    this.productRequest.baseQuantity = data.baseStock;
+    this.productRequest.brand = data.product.brand;
+    this.productRequest.category = data.product.category;
+    this.productRequest.code = data.product.code;
+    this.productRequest.description = data.product.description;
+    this.productRequest.name = data.product.name;
+    this.productRequest.publicPrice = data.product.price;
+    this.productRequest.stock = data.stock;
   }
 
   addProductInTable(product: ProductRequest) {
@@ -185,17 +205,8 @@ export class NewSaleComponent implements OnInit {
   }
 
   private createShopping() {
-    this.productsResponse.length = 0;
-    this.productsInTable.forEach((productInTable) => {
-      let productResponse: ProductoResponse = {
-        code: productInTable.code,
-        quantity: productInTable.amount
-      };
-      this.productsResponse.push(productResponse);
-    });
-
     this.saleService
-      .createSale(this.clientRequest.numDocument, this.productsResponse)
+      .createSale(this.buildSale())
       .subscribe(
         (data) => {
           this.resetForm();
@@ -205,6 +216,23 @@ export class NewSaleComponent implements OnInit {
           this.alert.infoAlet('Stock Insuficiente', err.error);
         }
       );
+  }
+
+  private buildSale(): SaleSaveRequest{
+    this.productsResponse.length = 0;
+    this.productsInTable.forEach((productInTable) => {
+      let productResponse: ProductoResponse = {
+        code: productInTable.code,
+        quantity: productInTable.amount
+      };
+      this.productsResponse.push(productResponse);
+    });
+    return {
+      clientNumDocument: this.formGroupSale.value.isCredit,
+      isCredit: this.formGroupSale.value.paymentMethod,
+      paymentAmount: this.formGroupSale.value.paymentAmount,
+      items: this.productsResponse
+    };
   }
 
   deleteProductInTable(code: string) {
@@ -241,6 +269,10 @@ export class NewSaleComponent implements OnInit {
     this.productsInTable.forEach((p) => (this.totalSalePrice += p.totalPrice));
   }
 
+  showProduct(product : any){
+    return product ? product.name : '';
+  }
+
 
   private resetForm(){
     this.productsInTable.length = 0;
@@ -269,32 +301,21 @@ export class NewSaleComponent implements OnInit {
       createDate: null,
       description: null,
       name: null,
-      privatePrice: null,
       publicPrice: null,
       stock: null,
       updateDate: null,
     };
   }
 
-  //componente de busqueda de producto por conincidencia
-  selectEvent(item) {
-    // do something with selected item
-    this.productRequest = item;
-    this.addProductInTable(this.productRequest);
-    this.productsByName$ = null;
+  onChangeSearch(event: any) {
+    const name = event.target.value;
+    this.productService.findByName(name).subscribe(data =>{
+      this.productsByName = data;
+    }, error => {
+      console.log("No se encontró informacion con la coincidencia ", name)
+    });
   }
 
-
-  onChangeSearch(name: string) {
-    // fetch remote data from here
-    // And reassign the 'data' which is binded to 'data' property.
-    this.productsByName$ = this.productService.findByName(name);
-    console.log(this.productsByName$);
-  }
-
-  onFocused(e){
-    // do something when input is focused
-  }
 
 
 }

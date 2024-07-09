@@ -25,6 +25,9 @@ export class ProductDetailComponent implements OnInit {
   editable: boolean = false;
   priceValue: number;
   categories: Array<any> = [];
+  nameProduct: string = '';
+  createdDate: string = '';
+  updatedDate: string = '';
 
   constructor(
     private fb: UntypedFormBuilder,
@@ -89,6 +92,9 @@ export class ProductDetailComponent implements OnInit {
   }
 
   private uploadDates() {
+    this.nameProduct = this.product.name;
+    this.createdDate = this.inventory.createDate;
+    this.updatedDate = this.inventory.updateDate;
     this.formProductDetail.patchValue({
       name: this.product.name,
       code: this.product.code,

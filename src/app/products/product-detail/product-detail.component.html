@@ -1,5 +1,5 @@
 <div class="container mt-5 mb-5">
-  <h2 class="text text-center">{{ product.name }}</h2>
+  <h2 class="text text-center">{{ nameProduct }}</h2>
   <div class="row mt-4">
     <div class="col-sm-6 container">
       <h2 class="text">Detelles de producto</h2>
@@ -8,8 +8,7 @@
           <div class="col-sm-12">
             <mat-form-field
               class="myField"
-              appearance="fill"
-              [class.noEditable]="!editable"
+              [ngClass]="{ noEditable: !editable }"
             >
               <mat-label class="required"> Nombre </mat-label>
               <input
@@ -29,8 +28,7 @@
           <div class="col-md-4">
             <mat-form-field
               class="myField"
-              appearance="fill"
-              [class.noEditable]="!editable"
+              [ngClass]="{ noEditable: !editable }"
             >
               <mat-label class="required"> Código </mat-label>
               <input
@@ -48,8 +46,7 @@
           <div class="col-md-4">
             <mat-form-field
               class="myField"
-              appearance="fill"
-              [class.noEditable]="!editable"
+              [ngClass]="{ noEditable: !editable }"
             >
               <mat-label class="required"> Marca </mat-label>
               <input
@@ -66,8 +63,7 @@
           <div class="col-md-4">
             <mat-form-field
               class="myField"
-              appearance="fill"
-              [class.noEditable]="!editable"
+              [ngClass]="{ noEditable: !editable }"
             >
               <mat-label class="required">Categoría</mat-label>
               <mat-select formControlName="category">
@@ -88,8 +84,7 @@
           <div class="col-md-6">
             <mat-form-field
               class="myField"
-              appearance="fill"
-              [class.noEditable]="!editable"
+              [ngClass]="{ noEditable: !editable }"
             >
               <mat-label>Modelo</mat-label>
               <input
@@ -104,8 +99,7 @@
           <div class="col-md-6">
             <mat-form-field
               class="myField"
-              appearance="fill"
-              [class.noEditable]="!editable"
+              [ngClass]="{ noEditable: !editable }"
             >
               <mat-label>Precio: </mat-label>
               <input
@@ -126,8 +120,7 @@
           <div class="col-md-4">
             <mat-form-field
               class="myField"
-              appearance="fill"
-              [class.noEditable]="!editable"
+              [ngClass]="{ noEditable: !editable }"
             >
               <mat-label>Alto</mat-label>
               <input
@@ -148,8 +141,7 @@
           <div class="col-md-4">
             <mat-form-field
               class="myField"
-              appearance="fill"
-              [class.noEditable]="!editable"
+              [ngClass]="{ noEditable: !editable }"
             >
               <mat-label>Ancho</mat-label>
               <input
@@ -168,8 +160,7 @@
           <div class="col-md-4">
             <mat-form-field
               class="myField"
-              appearance="fill"
-              [class.noEditable]="!editable"
+              [ngClass]="{ noEditable: !editable }"
             >
               <mat-label>Profundidad</mat-label>
               <input
@@ -191,8 +182,7 @@
           <div class="col-md-4">
             <mat-form-field
               class="myField"
-              appearance="fill"
-              [class.noEditable]="!editable"
+              [ngClass]="{ noEditable: !editable }"
             >
               <mat-label>Peso</mat-label>
               <input
@@ -216,8 +206,7 @@
           <div class="col-md-4">
             <mat-form-field
               class="myField"
-              appearance="fill"
-              [class.noEditable]="!editable"
+              [ngClass]="{ noEditable: !editable }"
             >
               <mat-label>Color</mat-label>
               <input
@@ -232,8 +221,7 @@
           <div class="col-md-4">
             <mat-form-field
               class="myField"
-              appearance="fill"
-              [class.noEditable]="!editable"
+              [ngClass]="{ noEditable: !editable }"
             >
               <mat-label>Voltage</mat-label>
               <mat-select formControlName="voltage">
@@ -246,8 +234,7 @@
           <div class="col-md-4">
             <mat-form-field
               class="myField"
-              appearance="fill"
-              [class.noEditable]="!editable"
+              [ngClass]="{ noEditable: !editable }"
             >
               <mat-label>Garantía (Meses)</mat-label>
               <input
@@ -266,30 +253,28 @@
           <div class="col-sm-6">
             <mat-form-field
               class="myField"
-              appearance="fill"
-              [class.noEditable]="!editable"
+              [ngClass]="{ noEditable: !editable }"
             >
               <mat-label> Fecha de creación </mat-label>
               <input
                 matInput
                 type="text"
                 readonly
-                value="{{ inventory.product.createdDate | date : 'short' }}"
+                value="{{ createdDate | date : 'short' }}"
               />
             </mat-form-field>
           </div>
           <div class="col-sm-6">
             <mat-form-field
               class="myField"
-              appearance="fill"
-              [class.noEditable]="!editable"
+              [ngClass]="{ noEditable: !editable }"
             >
               <mat-label> Fecha de actualización </mat-label>
               <input
                 matInput
                 type="text"
                 readonly
-                value="{{ inventory.product.updatedDate | date : 'short' }}"
+                value="{{ updatedDate | date : 'short' }}"
               />
             </mat-form-field>
           </div>
@@ -298,8 +283,7 @@
         <div class="row mt-2">
           <div class="col-sm-12">
             <mat-form-field
-              appearance="fill"
-              [class.noEditable]="!editable"
+              [ngClass]="{ noEditable: !editable }"
               style="width: 100%; height: 100%"
             >
               <mat-label>Descripción</mat-label>

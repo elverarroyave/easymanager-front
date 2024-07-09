@@ -27,8 +27,10 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { AddDistributorComponent } from './distributors/add-distributor/add-distributor.component';
 import { MaterialModule } from './material/material.module';
 import { TruncatePipe } from './pipes/truncate.pipe';
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
+import { MatInputModule } from '@angular/material/input';
 import { CurrencyMaskModule } from "ng2-currency-mask";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
     AutocompleteLibModule,
     MaterialModule,
     MatInputModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    MatAutocompleteModule,
+    MatCheckboxModule
   ],
   providers: [
     AlertService
