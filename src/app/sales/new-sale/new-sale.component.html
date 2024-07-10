@@ -162,10 +162,42 @@
 
   <h2>Datos de venta</h2>
 
-  <section class="example-section">
-    <mat-checkbox class="example-margin">Es credito</mat-checkbox>
-  </section>
-
+  <form [formGroup]="formGroupSale">
+    <div class="row mt-2 mb-2">
+        <div class="col-sm-1">
+          <section class="example-section">
+            <mat-checkbox formControlName="isCredit" (click)="updateTotal()">Es crédito</mat-checkbox>
+          </section>
+        </div>
+        <div class="col-md-3" *ngIf="formGroupSale.get('isCredit').value">
+          <mat-form-field class="myField" appearance="fill">
+            <mat-label class="required">Cantidad de pagos</mat-label>
+            <mat-select formControlName="paymentAmount">
+              <mat-option
+                *ngFor="let term of creditTerms"
+                [value]="term.value"
+                (click)="updateTotal()"
+              >
+                {{ term.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-3">
+          <mat-form-field class="myField" appearance="fill">
+            <mat-label class="required">Método pago</mat-label>
+            <mat-select formControlName="paymentMethod">
+              <mat-option
+                *ngFor="let paymentMethod of paymentMethods"
+                [value]="paymentMethod"
+              >
+                {{ paymentMethod }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+    </div>
+  </form>
 
   <div class="table-responsive">
     <h4 class="text text-center">Detalles de compra</h4>
@@ -216,9 +248,17 @@
           <td></td>
           <td></td>
           <td></td>
-          <td><h2 class="text" style="text-align: right;">Total:</h2></td>
           <td>
-            <h2 class="text">{{ totalSalePrice | currency: "$" }}</h2>
+            <h3 class="text result" style="text-align: right;">Subtotal:</h3>
+            <h3 class="text result" *ngIf="formGroupSale.get('isCredit').value" style="text-align: right;">Intereses:</h3>
+            <h2 class="text result" style="text-align: right;">Total:</h2>
+            <h2 class="text result" *ngIf="formGroupSale.get('isCredit').value"style="text-align: right;">Primer pago:</h2>
+          </td>
+          <td>
+            <h3 class="text result">{{ subTotal | currency: "$" }}</h3>
+            <h3 class="text result" *ngIf="formGroupSale.get('isCredit').value">{{ interest | currency: "$" }}</h3>
+            <h2 class="text result">{{ totalSalePrice | currency: "$" }}</h2>
+            <h2 class="text result" *ngIf="formGroupSale.get('isCredit').value">{{ firstPayValue | currency: "$" }}</h2>
           </td>
         </tr>
       </tfoot>

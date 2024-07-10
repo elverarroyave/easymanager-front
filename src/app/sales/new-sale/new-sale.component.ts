@@ -43,6 +43,15 @@ export class NewSaleComponent implements OnInit {
   //Total price shopping
   totalSalePrice: number = 0;
 
+  //subtotal
+  subTotal: number = 0;
+
+  //interest
+  interest: number = 0;
+
+  //FirstPayValue
+  firstPayValue: number = 0;
+
   //Herramienta
   tools: Tools = new Tools();
 
@@ -50,6 +59,11 @@ export class NewSaleComponent implements OnInit {
   productsByName: any[];
   productName: string = 'name';
 
+  paymentMethods: string[] = ['Efectivo', 'Bancolombia', 'Efectivo'];
+
+  creditTerms: any[] = [];
+
+  interestRate: number = 0.03;
 
   constructor(
     private clientsService: ClientsService,
@@ -65,6 +79,7 @@ export class NewSaleComponent implements OnInit {
     //Cargamos los formularios
     this.formClient();
     this.formProduct();
+    this.formSale();
 
     this.clientRequest = {
       id: 0,
@@ -90,6 +105,19 @@ export class NewSaleComponent implements OnInit {
 
     this.isActiveBtnShopping = false;
 
+    this.loadCreditTerms();
+
+  }
+
+  loadCreditTerms(){
+    this.creditTerms = [
+      { name: 'Un mes', value: 1 },
+      { name: 'Dos meses', value: 2 },
+      { name: 'Tres meses', value: 3 },
+      { name: 'Cuatro meses', value: 4 },
+      { name: 'Cinco meses', value: 5 },
+      { name: 'Seis meses', value: 6 },
+    ]
   }
 
   ngDoCheck() {
@@ -116,7 +144,7 @@ export class NewSaleComponent implements OnInit {
   private formSale(): void{
     this.formGroupSale = this.fb.group({
       isCredit: [false, Validators.required],
-      paymentMethod: ['', Validators.required],
+      paymentMethod: ['Efectivo', Validators.required],
       paymentAmount: [1, Validators.required],
     })
   }
@@ -265,8 +293,19 @@ export class NewSaleComponent implements OnInit {
   }
 
   updateTotal() {
-    this.totalSalePrice = 0;
-    this.productsInTable.forEach((p) => (this.totalSalePrice += p.totalPrice));
+    this.subTotal = 0;
+    this.productsInTable.forEach((p) => (this.subTotal += p.totalPrice));
+    this.calulateInterest();
+    this.totalSalePrice = this.subTotal + this.interest;
+    this.firstPayValue = this.totalSalePrice/(this.formGroupSale.value.paymentAmount+1);
+  }
+
+  calulateInterest(){
+    if(this.formGroupSale.get('isCredit').value){
+      this.interest = this.subTotal * this.interestRate * this.formGroupSale.value.paymentAmount;
+    }else{
+        this.interest = 0;
+    }
   }
 
   showProduct(product : any){
@@ -276,7 +315,7 @@ export class NewSaleComponent implements OnInit {
 
   private resetForm(){
     this.productsInTable.length = 0;
-    this.totalSalePrice=0;
+    this.subTotal=0;
     this.formGroupClient.reset();
     this.formGroupProduct.reset();
 
