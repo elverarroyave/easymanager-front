@@ -1,8 +1,9 @@
 import {ProductoResponse} from "./ProductResponse";
 
 export interface SaleSaveRequest{
-  clientNumDocument: String;
+  clientNumDocument: string;
   isCredit: boolean;
   paymentAmount: number;
+  paymentMethod: number;
   items : Array<ProductoResponse>;
 }

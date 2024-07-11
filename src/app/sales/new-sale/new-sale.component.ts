@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import {ProductInTable} from './modelSale/ProductInTable';
 import {ProductoResponse} from './modelSale/ProductResponse';
 import {SaleSaveRequest} from "./modelSale/saleSaveRequest";
+import { PaymentMethodService } from 'src/app/services/payment-method.service';
 
 @Component({
   selector: 'app-new-sale',
@@ -57,9 +58,10 @@ export class NewSaleComponent implements OnInit {
 
   //Variables de consulta producto por nombre
   productsByName: any[];
+
   productName: string = 'name';
 
-  paymentMethods: string[] = ['Efectivo', 'Bancolombia', 'Efectivo'];
+  paymentMethods: any[] = [];
 
   creditTerms: any[] = [];
 
@@ -69,6 +71,7 @@ export class NewSaleComponent implements OnInit {
     private clientsService: ClientsService,
     private productService: ProductsService,
     private saleService: SaleService,
+    private paymentMethodService: PaymentMethodService,
     private fb: UntypedFormBuilder,
     private alert: AlertService
   ) {}
@@ -106,6 +109,7 @@ export class NewSaleComponent implements OnInit {
     this.isActiveBtnShopping = false;
 
     this.loadCreditTerms();
+    this.loadPaymentMethods();
 
   }
 
@@ -123,8 +127,7 @@ export class NewSaleComponent implements OnInit {
   ngDoCheck() {
     //ActiveBtnShopping
     this.isActiveBtnShopping =
-      this.productsInTable.length != 0 && this.clientRequest.id != 0;
-      console.log(this.isActiveBtnShopping);
+      this.productsInTable.length != 0 && this.clientRequest.id != 0 && this.formGroupSale.valid;
   }
 
   //formulario de cliente
@@ -144,7 +147,7 @@ export class NewSaleComponent implements OnInit {
   private formSale(): void{
     this.formGroupSale = this.fb.group({
       isCredit: [false, Validators.required],
-      paymentMethod: ['Efectivo', Validators.required],
+      paymentMethod: [Validators.required],
       paymentAmount: [1, Validators.required],
     })
   }
@@ -174,6 +177,15 @@ export class NewSaleComponent implements OnInit {
         this.alert.infoAlet('Opss', `${err.error}`);
       }
     );
+  }
+
+  loadPaymentMethods(){
+    this.paymentMethodService.getAllPaymentMethods().subscribe(data => {
+      this.paymentMethods = data;
+    }, error => {
+      this.alert.errorAlert('Error al cargar los metodos de pago', error.error);
+
+    });
   }
 
   private setProductRequest(data: any) {
@@ -256,9 +268,10 @@ export class NewSaleComponent implements OnInit {
       this.productsResponse.push(productResponse);
     });
     return {
-      clientNumDocument: this.formGroupSale.value.isCredit,
-      isCredit: this.formGroupSale.value.paymentMethod,
+      clientNumDocument: this.formGroupClient.value.document,
+      isCredit: this.formGroupSale.value.isCredit,
       paymentAmount: this.formGroupSale.value.paymentAmount,
+      paymentMethod: this.formGroupSale.value.paymentMethod,
       items: this.productsResponse
     };
   }
