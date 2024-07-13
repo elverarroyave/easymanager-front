@@ -62,8 +62,6 @@ export class AddProductComponent implements OnInit {
   }
 
   addProduct(){
-    console.log('formProduct-->', this.formProduct);
-    console.log('isValidForm-->', this.formProduct.valid);
     let product: Product = {
       brand:this.formProduct.value.brand,
       category:this.formProduct.value.category,

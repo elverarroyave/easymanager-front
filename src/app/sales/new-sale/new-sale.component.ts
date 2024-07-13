@@ -12,6 +12,7 @@ import {ProductInTable} from './modelSale/ProductInTable';
 import {ProductoResponse} from './modelSale/ProductResponse';
 import {SaleSaveRequest} from "./modelSale/saleSaveRequest";
 import { PaymentMethodService } from 'src/app/services/payment-method.service';
+import { MasterServiceService } from 'src/app/services/master-service.service';
 
 @Component({
   selector: 'app-new-sale',
@@ -61,11 +62,11 @@ export class NewSaleComponent implements OnInit {
 
   productName: string = 'name';
 
-  paymentMethods: any[] = [];
+  paymentMethods: any[];
 
   creditTerms: any[] = [];
 
-  interestRate: number = 0.03;
+  interestRate: number;
 
   constructor(
     private clientsService: ClientsService,
@@ -73,7 +74,8 @@ export class NewSaleComponent implements OnInit {
     private saleService: SaleService,
     private paymentMethodService: PaymentMethodService,
     private fb: UntypedFormBuilder,
-    private alert: AlertService
+    private alert: AlertService,
+    private MasterService: MasterServiceService
   ) {}
 
   ngOnInit(): void {
@@ -107,21 +109,31 @@ export class NewSaleComponent implements OnInit {
     }
 
     this.isActiveBtnShopping = false;
-
-    this.loadCreditTerms();
-    this.loadPaymentMethods();
-
+    this.loadMasters();
   }
 
+  private loadMasters(){
+    this.loadCreditTerms();
+    this.loadPaymentMethods();
+    this.loadInterestRate();
+  }
+
+
   loadCreditTerms(){
-    this.creditTerms = [
-      { name: 'Un mes', value: 1 },
-      { name: 'Dos meses', value: 2 },
-      { name: 'Tres meses', value: 3 },
-      { name: 'Cuatro meses', value: 4 },
-      { name: 'Cinco meses', value: 5 },
-      { name: 'Seis meses', value: 6 },
-    ]
+    this.MasterService.getMasterData('MONTHLY_PAYMENT_OPTIONS').subscribe(data => {
+      this.creditTerms = data;
+      console.log(this.creditTerms);
+    }, error => {
+      this.alert.errorAlert('Error al cargar las opciones de pago', error.error);
+    });
+  }
+
+  loadInterestRate(){
+    this.MasterService.getMasterData('CURRENT_MONTHLY_INTEREST').subscribe(data => {
+      this.interestRate = data[0]?.value;
+    }, error => {
+      this.alert.errorAlert('Error al cargar la tasa de interes', error.error);
+    });
   }
 
   ngDoCheck() {
@@ -139,7 +151,7 @@ export class NewSaleComponent implements OnInit {
 
   private formProduct() {
     this.formGroupProduct = this.fb.group({
-      code: ['', Validators.required],
+      code: [''],
       name: ['']
     });
   }
@@ -147,8 +159,8 @@ export class NewSaleComponent implements OnInit {
   private formSale(): void{
     this.formGroupSale = this.fb.group({
       isCredit: [false, Validators.required],
-      paymentMethod: [Validators.required],
-      paymentAmount: [1, Validators.required],
+      paymentMethod: [1,Validators.required],
+      paymentAmount: ["1", Validators.required],
     })
   }
 
@@ -270,7 +282,7 @@ export class NewSaleComponent implements OnInit {
     return {
       clientNumDocument: this.formGroupClient.value.document,
       isCredit: this.formGroupSale.value.isCredit,
-      paymentAmount: this.formGroupSale.value.paymentAmount,
+      paymentAmount: parseInt(this.formGroupSale.value.paymentAmount),
       paymentMethod: this.formGroupSale.value.paymentMethod,
       items: this.productsResponse
     };
@@ -310,12 +322,12 @@ export class NewSaleComponent implements OnInit {
     this.productsInTable.forEach((p) => (this.subTotal += p.totalPrice));
     this.calulateInterest();
     this.totalSalePrice = this.subTotal + this.interest;
-    this.firstPayValue = this.totalSalePrice/(this.formGroupSale.value.paymentAmount+1);
+    this.firstPayValue = this.totalSalePrice/(parseInt(this.formGroupSale.value.paymentAmount)+1);
   }
 
   calulateInterest(){
     if(this.formGroupSale.get('isCredit').value){
-      this.interest = this.subTotal * this.interestRate * this.formGroupSale.value.paymentAmount;
+      this.interest = this.subTotal * this.interestRate * parseInt(this.formGroupSale.value.paymentAmount);
     }else{
         this.interest = 0;
     }
