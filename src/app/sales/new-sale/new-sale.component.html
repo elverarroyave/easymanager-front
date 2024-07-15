@@ -9,28 +9,25 @@
     <h1 class="text text-center">Nueva venta</h1>
     <div class="row mt-2 mb-1">
       <h2 class="text">Datos de Cliente</h2>
-      <div class="col-md-4">
-        <form action="" [formGroup]="formGroupClient">
+      <form [formGroup]="formGroupClient">
+        <div class="col-md-4">
           <mat-form-field class="myField" appearance="fill">
-            <mat-label class="required">Documento</mat-label>
+            <mat-label>Cliente</mat-label>
             <input
               matInput
-              placeholder="Ingresa el número de docuemtno..."
+              placeholder="Buscar..."
               formControlName="document"
-              (keydown.enter)="loadClient()"
+              [matAutocomplete]="autoCompleteClient"
+              (keypress)="onChangeSearchClient($event)"
             >
+            <mat-autocomplete #autoCompleteClient="matAutocomplete" [displayWith]="showClient">
+              <mat-option *ngFor="let client of clientsByCoincidence" [value]="client" (click)="loadClient(client)">
+                {{client.name}} {{client.lastName}} - {{client.numDocument}}
+              </mat-option>
+            </mat-autocomplete>
           </mat-form-field>
-        </form>
-      </div>
-      <div class="mt-1 mb-1">
-        <button
-          class="btn btn-outline-primary"
-          (click)="loadClient()"
-          [disabled]="formGroupClient.invalid"
-        >
-          Buscar
-        </button>
-      </div>
+        </div>
+      </form>
     </div>
     <div class="row mt-2 mb-2">
       <div class="col-md-5">
@@ -81,31 +78,34 @@
           <mat-label>Código de producto:</mat-label>
           <input
             matInput
+            #inputFindByCode
             placeholder="ingrese el código del producto..."
             formControlName="code"
-            (keyup.enter)="loadProduct()"
+            (keydown.enter)="loadProduct()"
           />
         </mat-form-field>
       </form>
     </div>
 
     <div class="col-md-6 ng-autocomplete">
+      <form [formGroup]="formGroupProduct">
+        <mat-form-field class="myField" appearance="fill">
+          <mat-label>Buscar por nombre del producto:</mat-label>
+          <input
+            matInput
+            placeholder="Ingrese el nombre del producto..."
+            formControlName="name"
+            [matAutocomplete]="autoComplete"
+            (keypress)="onChangeSearch($event)"
+          >
 
-      <mat-form-field class="myField" appearance="fill">
-        <mat-label>Buscar por nombre del producto:</mat-label>
-        <input
-          matInput
-          placeholder="Ingrese el nombre del producto..."
-          [matAutocomplete]="autoComplete"
-          (input)="onChangeSearch($event)"
-        >
-
-        <mat-autocomplete #autoComplete="matAutocomplete" [displayWith]="showProduct">
-          <mat-option *ngFor="let product of productsByName" [value]="product" (click)="loadProduct(product.code)">
-            {{product.name}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+          <mat-autocomplete #autoComplete="matAutocomplete" [displayWith]="showProduct">
+            <mat-option *ngFor="let product of productsByName" [value]="product" (click)="loadProduct(product.code)">
+              {{product.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
     </div>
 
   </div>

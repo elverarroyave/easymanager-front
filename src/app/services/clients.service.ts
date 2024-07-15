@@ -27,6 +27,10 @@ export class ClientsService {
     return this.httpClient.get<any>(this.URLClient + 'document/' + numDocument);
   }
 
+  public findByCoincidence(coincidence: string){
+    return this.httpClient.get<any>(this.URLClient + 'coincidence/' + coincidence);
+  }
+
   public updateClient(id: number, client:Client){
     return this.httpClient.put<any>(this.URLClient + id, client);
   }

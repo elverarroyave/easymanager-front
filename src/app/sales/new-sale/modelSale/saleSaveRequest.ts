@@ -5,5 +5,6 @@ export interface SaleSaveRequest{
   isCredit: boolean;
   paymentAmount: number;
   paymentMethod: number;
+  firstPayment: number;
   items : Array<ProductoResponse>;
 }

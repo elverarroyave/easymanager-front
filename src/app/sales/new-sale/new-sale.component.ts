@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {ClientRequest} from 'src/app/model/ClientRequest';
 import {ProductRequest} from 'src/app/model/ProductRequest';
@@ -21,6 +21,8 @@ import { MasterServiceService } from 'src/app/services/master-service.service';
   providers: [ProductsService]
 })
 export class NewSaleComponent implements OnInit {
+
+  @ViewChild('inputFindByCode') inputFindByCode: ElementRef;
   //Formularios
   formGroupClient: UntypedFormGroup;
   formGroupProduct: UntypedFormGroup;
@@ -60,6 +62,8 @@ export class NewSaleComponent implements OnInit {
   //Variables de consulta producto por nombre
   productsByName: any[];
 
+  clientsByCoincidence: any[] = [];
+
   productName: string = 'name';
 
   paymentMethods: any[];
@@ -67,6 +71,7 @@ export class NewSaleComponent implements OnInit {
   creditTerms: any[] = [];
 
   interestRate: number;
+
 
   constructor(
     private clientsService: ClientsService,
@@ -86,27 +91,8 @@ export class NewSaleComponent implements OnInit {
     this.formProduct();
     this.formSale();
 
-    this.clientRequest = {
-      id: 0,
-      name: '',
-      lastName: '',
-      email: '',
-      address: '',
-      numPhone: '',
-      numDocument: '',
-    }
-
-    this.productRequest = {
-      id: 0,
-      baseQuantity: 0,
-      brand: '',
-      category: '',
-      code: '',
-      description: '',
-      name: '',
-      publicPrice: 0,
-      stock: 0
-    }
+    this.initClientRequest();
+    this.initProductRequest();
 
     this.isActiveBtnShopping = false;
     this.loadMasters();
@@ -118,6 +104,31 @@ export class NewSaleComponent implements OnInit {
     this.loadInterestRate();
   }
 
+  initClientRequest(){
+    this.clientRequest = {
+      id: 0,
+      name: '',
+      lastName: '',
+      email: '',
+      address: '',
+      numPhone: '',
+      numDocument: '',
+    }
+  }
+
+  initProductRequest(){
+    this.productRequest = {
+      id: 0,
+      baseQuantity: 0,
+      brand: '',
+      category: '',
+      code: '',
+      description: '',
+      name: '',
+      publicPrice: 0,
+      stock: 0
+    }
+  }
 
   loadCreditTerms(){
     this.MasterService.getMasterData('MONTHLY_PAYMENT_OPTIONS').subscribe(data => {
@@ -164,17 +175,8 @@ export class NewSaleComponent implements OnInit {
     })
   }
 
-  loadClient() {
-    const numDocument = this.formGroupClient.value.document;
-    this.clientsService.findByDocument(numDocument).subscribe(
-      (data) => {
-        this.clientRequest = data.content[0];
-      },
-      (err) => {
-        console.log(err);
-        this.alert.infoAlet('Cliente no encontrado', `${err.error}`);
-      }
-    );
+  loadClient(client: any){
+    this.clientRequest = client;
   }
 
   loadProduct(productCode?: string) {
@@ -189,6 +191,30 @@ export class NewSaleComponent implements OnInit {
         this.alert.infoAlet('Opss', `${err.error}`);
       }
     );
+  }
+
+  onChangeSearchClient(event: any) {
+    const input = event.target.value;
+    if(event.key==='Enter'){
+      this.clientRequest = this.clientsByCoincidence.find((client) => client.numDocument == input);
+      if(this.clientRequest){
+        this.clientsByCoincidence.length = 0;
+        this.inputFindByCode.nativeElement.focus();
+      }else{
+        this.initClientRequest();
+        this.alert.infoAlet('Cliente no encontrado', 'No se encontró ningun cliente con el documento ingresdo');
+      }
+      return;
+    }
+    // if (input.length < 3) return;
+    this.clientsService.findByCoincidence(input).subscribe(data =>{
+      this.clientsByCoincidence = data.content;
+    }, error => {
+    });
+  }
+
+  pressEnterClient(client: any){
+    console.log(client);
   }
 
   loadPaymentMethods(){
@@ -279,11 +305,13 @@ export class NewSaleComponent implements OnInit {
       };
       this.productsResponse.push(productResponse);
     });
+    console.log('this.formGroupClient.value-->', this.formGroupClient.value.document);
     return {
-      clientNumDocument: this.formGroupClient.value.document,
+      clientNumDocument: this.formGroupClient.value.document.numDocument,
       isCredit: this.formGroupSale.value.isCredit,
       paymentAmount: parseInt(this.formGroupSale.value.paymentAmount),
       paymentMethod: this.formGroupSale.value.paymentMethod,
+      firstPayment: this.firstPayValue,
       items: this.productsResponse
     };
   }
@@ -337,42 +365,39 @@ export class NewSaleComponent implements OnInit {
     return product ? product.name : '';
   }
 
+  showClient(client: any){
+    return client ? client.numDocument : '';
+  }
+
 
   private resetForm(){
     this.productsInTable.length = 0;
     this.subTotal=0;
     this.formGroupClient.reset();
     this.formGroupProduct.reset();
+    this.formGroupSale.reset();
 
-    this.clientRequest = {
-      id: 0,
-      name: null,
-      lastName: null,
-      email: null,
-      address: null,
-      numPhone: null,
-      numDocument: null,
-      createDate: null,
-      updateDate: null
-    }
+    this.initClientRequest();
+    this.initProductRequest();
 
-    this.productRequest = {
-      id: null,
-      baseQuantity: null,
-      brand: null,
-      category: null,
-      code: null,
-      createDate: null,
-      description: null,
-      name: null,
-      publicPrice: null,
-      stock: null,
-      updateDate: null,
-    };
+    this.updateTotal();
   }
 
   onChangeSearch(event: any) {
     const name = event.target.value;
+    if(event.key==='Enter'){
+      let producttSelected = this.productsByName.find((product) => product.name == name);
+      if(producttSelected){
+        this.loadProduct(producttSelected.code);
+        this.productsByName.length = 0;
+        //todo focus in check
+      }else{
+        this.initProductRequest();
+        this.alert.infoAlet('Producto no encontrado', 'No se encontró ningun producto con el nombre ingresado');
+      }
+      return;
+    }
+    // if (name.length < 3) return;
     this.productService.findByName(name).subscribe(data =>{
       this.productsByName = data;
     }, error => {
