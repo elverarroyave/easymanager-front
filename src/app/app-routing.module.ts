@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddClientComponent } from './clients/add-client/add-client.component';
-import { ClientDetailShoppingComponent } from './clients/client-detail-shopping/client-detail-shopping.component';
 import { ClientDetailComponent } from './clients/client-detail/client-detail.component';
 import { ListClientsComponent } from './clients/list-clients/list-clients.component';
 import { HomeComponent } from './home/home.component';
@@ -21,7 +20,6 @@ const routes: Routes = [
   { path: 'clients/list-clients', component: ListClientsComponent },
   { path: 'clients/add-client', component: AddClientComponent},
   { path: 'clients/client-detail/:id', component: ClientDetailComponent},
-  { path: 'clients/client-detail/:id/sale/:idSale', component: ClientDetailShoppingComponent},
   { path: 'sales/new', component: NewSaleComponent},
   { path: 'sales/salesConsult', component: SalesConsultComponent},
   { path: 'sales/saleConsultDetail/:id', component: SaleConsultDetailComponent},

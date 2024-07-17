@@ -19,7 +19,6 @@ import { ListClientsComponent } from './clients/list-clients/list-clients.compon
 import { AddClientComponent } from './clients/add-client/add-client.component';
 import { ClientDetailComponent } from './clients/client-detail/client-detail.component';
 import { ShopingClientComponent } from './clients/shoping-client/shoping-client.component';
-import { ClientDetailShoppingComponent } from './clients/client-detail-shopping/client-detail-shopping.component';
 import { NewSaleComponent } from './sales/new-sale/new-sale.component';
 import { SalesConsultComponent } from './sales/sales-consult/sales-consult.component';
 import { SaleConsultDetailComponent } from './sales/sale-consult-detail/sale-consult-detail.component';
@@ -44,7 +43,6 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     AddClientComponent,
     ClientDetailComponent,
     ShopingClientComponent,
-    ClientDetailShoppingComponent,
     NewSaleComponent,
     SalesConsultComponent,
     SaleConsultDetailComponent,
