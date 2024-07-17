@@ -23,6 +23,7 @@ import { MasterServiceService } from 'src/app/services/master-service.service';
 export class NewSaleComponent implements OnInit {
 
   @ViewChild('inputFindByCode') inputFindByCode: ElementRef;
+  @ViewChild('inputFindByClient') inputFindClient: ElementRef;
   //Formularios
   formGroupClient: UntypedFormGroup;
   formGroupProduct: UntypedFormGroup;
@@ -98,6 +99,10 @@ export class NewSaleComponent implements OnInit {
     this.loadMasters();
   }
 
+  ngAfterViewInit(){
+    setTimeout(() => this.inputFindClient.nativeElement.focus());
+  }
+
   private loadMasters(){
     this.loadCreditTerms();
     this.loadPaymentMethods();
@@ -133,7 +138,6 @@ export class NewSaleComponent implements OnInit {
   loadCreditTerms(){
     this.MasterService.getMasterData('MONTHLY_PAYMENT_OPTIONS').subscribe(data => {
       this.creditTerms = data;
-      console.log(this.creditTerms);
     }, error => {
       this.alert.errorAlert('Error al cargar las opciones de pago', error.error);
     });

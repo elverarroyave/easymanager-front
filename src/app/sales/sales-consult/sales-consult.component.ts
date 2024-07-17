@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { SaleService } from 'src/app/services/sale.service';
 import { SaleInTable } from './model-sales-consult/SaleInTable';
 import { AlertService } from 'src/app/services/alert.service';
+import { DataSharingServiceService } from 'src/app/services/data-sharing-service.service';
 
 
 @Component({
@@ -27,7 +28,9 @@ export class SalesConsultComponent implements OnInit {
     private fb: UntypedFormBuilder,
     private saleService: SaleService,
     private router: Router,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private dataSharingService: DataSharingServiceService
+  ) { }
 
   otherRange: boolean = false;
 
@@ -95,6 +98,10 @@ export class SalesConsultComponent implements OnInit {
   }
 
   goToSale(id: number){
+    this.dataSharingService.setData({
+      route: `/sales/salesConsult`,
+      nameButton: 'Volver a consulta de ventas'
+    })
     this.router.navigateByUrl('/sales/saleConsultDetail/'+id);
   }
 

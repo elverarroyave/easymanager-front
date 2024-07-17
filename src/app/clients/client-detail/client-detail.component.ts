@@ -16,7 +16,20 @@ import { Tools } from 'src/app/tools/Tools';
 export class ClientDetailComponent implements OnInit {
   //Variables
   formClientDetail: UntypedFormGroup;
-  clientRquest: ClientRequest;
+
+  clientRquest: ClientRequest = {
+    id: 0,
+    name: '',
+    lastName: '',
+    email: '',
+    address: '',
+    numPhone: '',
+    numDocument: '',
+    createDate: '',
+    updateDate: '',
+    link: [],
+  };
+
   clientId: string;
 
   tools: Tools = new Tools();
@@ -32,6 +45,7 @@ export class ClientDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.formClientDetailInit();
     this.clientId = this.activateddRoute.snapshot.params.id;
     //Find client by id
     const id: number = parseInt(this.activateddRoute.snapshot.params.id);
@@ -45,18 +59,19 @@ export class ClientDetailComponent implements OnInit {
         console.log(err);
       }
     );
-
-    //Formulario
-    this.formClientDetail = this.fb.group({
-      name: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', Validators.compose([Validators.required, Validators.email])],
-      address: ['', Validators.required],
-      phone: [''],
-      document: [''],
-    });
-
     this.formClientDetail.disable();
+  }
+
+  formClientDetailInit(){
+      //Formulario
+      this.formClientDetail = this.fb.group({
+        name: ['', Validators.required],
+        lastName: ['', Validators.required],
+        email: ['', Validators.compose([Validators.required, Validators.email])],
+        address: ['', Validators.required],
+        phone: [''],
+        document: [''],
+      });
   }
 
   loadData() {

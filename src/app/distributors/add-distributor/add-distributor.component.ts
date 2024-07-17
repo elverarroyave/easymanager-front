@@ -40,7 +40,7 @@ export class AddDistributorComponent implements OnInit {
       address: this.formDistributor.value.address,
     }
     this.distributorService.saveDistributor(this.distributor).subscribe(data=>{
-      this.alertService.successAlet('¡Distribuidor Agregao!', `${this.distributor.name}, agregado correctamente.`)
+      this.alertService.successAlet('Proveedor Agregao!', `${this.distributor.name}, agregado correctamente.`)
     },err=>{
       this.alertService.errorAlert('Opss', `${err.error}`)
       console.log(err)

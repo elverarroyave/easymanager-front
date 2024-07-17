@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClientRequestShopping } from 'src/app/model/ClientRequestShopping';
-import { ClientsService } from 'src/app/services/clients.service';
 import { SaleService } from 'src/app/services/sale.service';
 import { ShoppingInTable } from './modelShopping/ShoppingInTable';
+import { DataSharingServiceService } from 'src/app/services/data-sharing-service.service';
 
 @Component({
   selector: 'app-shoping-client',
@@ -14,12 +14,13 @@ export class ShopingClientComponent implements OnInit {
 
   @Input() clientIdRequest: string;
   shoppings: Array<ClientRequestShopping>=[];
-  shoppingDetail: Array<ShoppingInTable>=[]; 
+  shoppingDetail: Array<ShoppingInTable>=[];
   notShopping: boolean = false;
 
   constructor(
     private salesService: SaleService,
-    private router: Router
+    private router: Router,
+    private dataSharingService: DataSharingServiceService
     ) { }
 
   ngOnInit(): void {
@@ -27,7 +28,6 @@ export class ShopingClientComponent implements OnInit {
     const id: number = parseInt(this.clientIdRequest);
     this.salesService.findSalesOfClient(id).subscribe(data=>{
       this.shoppings = data
-      //console.log(data)
       this.loadDataTable();
     },err=>{
       console.log(err)
@@ -61,7 +61,11 @@ export class ShopingClientComponent implements OnInit {
   }
 
   goToSale(id){
-    this.router.navigateByUrl(`/clients/client-detail/${this.clientIdRequest}/sale/${id}`)
+    this.dataSharingService.setData({
+      route: `/clients/client-detail/${this.clientIdRequest}`,
+      nameButton: 'Volver a detalles del cliente'
+    })
+    this.router.navigateByUrl(`/sales/saleConsultDetail/${id}`)
   }
 
 
