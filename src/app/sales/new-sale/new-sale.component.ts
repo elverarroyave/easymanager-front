@@ -81,7 +81,7 @@ export class NewSaleComponent implements OnInit {
     private paymentMethodService: PaymentMethodService,
     private fb: UntypedFormBuilder,
     private alert: AlertService,
-    private MasterService: MasterServiceService
+    private masterService: MasterServiceService
   ) {}
 
   ngOnInit(): void {
@@ -136,7 +136,7 @@ export class NewSaleComponent implements OnInit {
   }
 
   loadCreditTerms(){
-    this.MasterService.getMasterData('MONTHLY_PAYMENT_OPTIONS').subscribe(data => {
+    this.masterService.getMasterData('MONTHLY_PAYMENT_OPTIONS').subscribe(data => {
       this.creditTerms = data;
     }, error => {
       this.alert.errorAlert('Error al cargar las opciones de pago', error.error);
@@ -144,7 +144,7 @@ export class NewSaleComponent implements OnInit {
   }
 
   loadInterestRate(){
-    this.MasterService.getMasterData('CURRENT_MONTHLY_INTEREST').subscribe(data => {
+    this.masterService.getMasterData('CURRENT_MONTHLY_INTEREST').subscribe(data => {
       this.interestRate = data[0]?.value;
     }, error => {
       this.alert.errorAlert('Error al cargar la tasa de interes', error.error);

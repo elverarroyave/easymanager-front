@@ -8,12 +8,17 @@ export class SaleRequest{
   updateDate: string;
   client: SaleClientRequest;
   user: SaleUserRequest;
+  total: number;
+  subtotal: number;
+  interestRate: number;
+  paymentMethod: string;
+  paymentAmount: number;
   constructor(){
     this.createDate="";
     this.id=0;
     this.productsDetail=[];
     this.updateDate="";
     this.client= new SaleClientRequest();
-    this.user= new SaleUserRequest(); 
+    this.user= new SaleUserRequest();
   }
 }

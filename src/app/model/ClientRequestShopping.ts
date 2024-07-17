@@ -3,5 +3,6 @@ export interface ClientRequestShopping{
   createDate: string;
   updateDate: string;
   productsDetail: Array<any>
+  total: number;
   user: any;
 }

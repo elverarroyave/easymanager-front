@@ -16,7 +16,6 @@ export class SaleConsultDetailComponent implements OnInit {
 
   tools: Tools = new Tools();
   saleDate: string = "";
-  totalPriceSale: number = 0;
   amountProductsSale: number = 0;
 
   constructor(
@@ -60,10 +59,6 @@ export class SaleConsultDetailComponent implements OnInit {
 
   loadDataSale(){
     this.saleDate = this.tools.dateFormat(this.saleRequest.createDate);
-    this.saleRequest.productsDetail.forEach(p=>{
-      this.totalPriceSale+=p.totalSale
-      this.amountProductsSale+=p.amount
-    });
   }
 
   goToBack(){

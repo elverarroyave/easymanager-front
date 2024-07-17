@@ -41,7 +41,7 @@ export class ShopingClientComponent implements OnInit {
         let totalInShopping = 0;
         let totalProducts = 0;
         shopp.productsDetail.forEach(productDetail=>{
-          totalInShopping += productDetail.totalSale;
+          totalInShopping += shopp.total;
           totalProducts += productDetail.amount
         })
         let shoppingInTable = new ShoppingInTable(

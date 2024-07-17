@@ -41,27 +41,36 @@
           <td>Código</td>
           <td>Nombre</td>
           <td>Cantidad</td>
+          <td>Plazo de pago(meses)</td>
           <td>Precio unitario</td>
+          <td>Sub total</td>
+          <td>Interes</td>
           <td>Precio total</td>
         </tr>
       </thead>
       <tbody *ngFor="let productDetail of saleRequest.productsDetail; index as i">
         <tr>
           <th>{{i+1}}</th>
-          <td>{{productDetail.codeProduct}}</td>
+          <td>{{productDetail.id}}</td>
           <td>{{productDetail.nameProduct}}</td>
           <td>{{productDetail.amount}}</td>
+          <td>{{saleRequest.paymentAmount}}</td>
           <td>{{productDetail.publicPriceProduct | currency:'$'}}</td>
+          <td>{{productDetail.subTotal | currency:'$'}}</td>
+          <td>{{productDetail.interest | currency:'$'}}</td>
           <th>{{productDetail.totalSale | currency:'$'}}</th>
         </tr>
       </tbody>
       <tfoot>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <th><h5 class="text">Total:</h5></th>
-        <th><h5 class="text">{{totalPriceSale | currency:'$'}}</h5></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th><h2 class="text">Total:</h2></th>
+        <th><h2 class="text">{{saleRequest.total | currency:'$'}}</h2></th>
       </tfoot>
     </table>
   </div>

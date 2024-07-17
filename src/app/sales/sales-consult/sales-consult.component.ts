@@ -5,6 +5,7 @@ import { SaleService } from 'src/app/services/sale.service';
 import { SaleInTable } from './model-sales-consult/SaleInTable';
 import { AlertService } from 'src/app/services/alert.service';
 import { DataSharingServiceService } from 'src/app/services/data-sharing-service.service';
+import { MasterServiceService } from 'src/app/services/master-service.service';
 
 
 @Component({
@@ -24,18 +25,33 @@ export class SalesConsultComponent implements OnInit {
 
   totalSalesPrice: number=0;
 
+  interestRate: number = 0;
   constructor(
     private fb: UntypedFormBuilder,
     private saleService: SaleService,
     private router: Router,
     private alertService: AlertService,
-    private dataSharingService: DataSharingServiceService
+    private dataSharingService: DataSharingServiceService,
+    private masterService: MasterServiceService
   ) { }
 
   otherRange: boolean = false;
 
   ngOnInit(): void {
     this.formDate();
+    this.loadMasterData();
+  }
+
+  loadMasterData(){
+    this.loadInterestRate();
+  }
+
+  loadInterestRate(){
+    this.masterService.getMasterData('CURRENT_MONTHLY_INTEREST').subscribe(data => {
+      this.interestRate = data[0]?.value;
+    }, error => {
+      console.log('Error al cargar la tasa de interes', error.error);
+    });
   }
 
   formDate(){
@@ -66,6 +82,7 @@ export class SalesConsultComponent implements OnInit {
   loadData(finalDate: string, initDate: string){
     this.salesRequest.length = 0;
     this.saleService.findByDateRange(initDate,finalDate).subscribe(data=>{
+      console.log(data);
       this.salesRequest = data
       this. loadSalesInTable();
     },err=>{
@@ -81,7 +98,7 @@ export class SalesConsultComponent implements OnInit {
       let total: number = 0;
       sale.productsDetail.forEach(p=>{
         amount += p.amount;
-        total += p.totalSale;
+        total += sale.total;
       })
       let saleInTable: SaleInTable = new SaleInTable(
         sale.id,
